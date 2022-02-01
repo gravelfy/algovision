@@ -1,0 +1,8 @@
+.chart {
+  display: flex;
+  height: 50vh;
+  /* max-height: 400px; */
+  align-items: stretch;
+  /* max-width: 300px;
+    border: 1px solid #ccc; */
+}

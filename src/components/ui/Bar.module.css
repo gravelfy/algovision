@@ -1,0 +1,13 @@
+.column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-end;
+}
+
+.barre {
+  border-right: 1px solid white;
+  background-color: #282c34;
+  color: white;
+}
