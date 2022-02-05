@@ -15,7 +15,26 @@
     FinPour
   */
 
-const triageInsertion = () => {
+//const triageInsertion = (tab) => {
+export function triageInsertion(tab) {
+  console.log('triage INSERTION ');
+  console.log(tab);
+  var historyArray = new Array();
+  var liste = [...tab];
+  historyArray = [[...liste]];
+  var size = liste.length;
+
+  for (var j = 1; j < size; j++) {
+    let cle = liste[j];
+    let i = j - 1;
+    while (i >= 0 && liste[i] > cle) {
+      liste[i + 1] = liste[i];
+      i--;
+    }
+    liste[i + 1] = cle;
+    historyArray.push([...liste]);
+  }
+
   //
   // //stop();
   // var liste = [...ordre];
@@ -35,4 +54,9 @@ const triageInsertion = () => {
   // }
   // setSortHistory(historyArray);
   // //play();
-};
+  return historyArray;
+}
+
+export function triageABulles() {
+  console.log('Triage à B U L L E S !');
+}

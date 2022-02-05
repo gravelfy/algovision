@@ -19,14 +19,14 @@ function App() {
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [count, setCount] = useState(30);
-  const [looping, setLooping] = useState(0);
+  const [loopingIdx, setLoopingIdx] = useState(0);
   const [ordre, setOrdre] = useState(0);
   const [sortHistory, setSortHistory] = useState(0);
 
   const MyProvider = (props) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [count, setCount] = useState(30);
-    const [looping, setLooping] = useState(0);
+    const [loopingIdx, setLoopingIdx] = useState(0);
     const [ordre, setOrdre] = useState(0);
     const [sortHistory, setSortHistory] = useState(0);
 
@@ -35,7 +35,7 @@ function App() {
         value={{
           isPlaying: [isPlaying, setIsPlaying],
           count: [count, setCount],
-          looping: [looping, setLooping],
+          looping: [loopingIdx, setLoopingIdx],
           ordre: [ordre, setOrdre],
           sortHistory: [sortHistory, setSortHistory],
         }}
@@ -63,7 +63,6 @@ function App() {
             </Route>
             <Route path="/commentaires">
               <AlgorePage countState="30" />
-
               {/* <AlgoPage /> */}
             </Route>
             <Route path="/favoris">

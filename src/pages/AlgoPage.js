@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { triageABulles, triageInsertion } from '../algos/tri';
 import Card from '../components/ui/Card';
 import Chart from '../components/ui/Chart';
@@ -11,19 +11,49 @@ export default function AlgoPage() {
 
   const [params, setParams] = useContext(ParamsContext);
 
-  console.log(params);
-  console.log(JSON.stringify(params));
+  const [loopingIdx, setLoopingIdx] = useState(0);
+
+  const chartRef = useRef();
+
+  console.log('params ', params);
+  //  console.log(JSON.stringify(params));
 
   // dirty hack
   const pdata = JSON.parse(JSON.stringify(params));
 
-  console.log(pdata);
+  console.log('pdata', pdata);
 
   const [isPlayingState, setIsPlayingState] = useState(pdata.isPlaying);
   const [countState, setCountState] = useState(pdata.count);
-  const [loopingState, setLoopingState] = useState(pdata.looping);
+  const [loopingIdxState, setLoopingIdxState] = useState(pdata.loopingIdx);
   const [ordreState, setOrdreState] = useState(pdata.ordre);
   const [sortHistoryState, setSortHistoryState] = useState(pdata.sortHistory);
+
+  function triInsertion(pt) {
+    setIsPlayingState(false);
+    setSortHistoryState(triageInsertion(chartRef.current.getTableau()));
+    setIsPlayingState(true);
+  }
+
+  //const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
+
+  const timeoutRef = useRef(setTimeout);
+
+  //console.log(ordre, sortHistory);
+  useEffect(() => {
+    setOrdreState(sortHistoryState[loopingIdxState]);
+  }, [loopingIdxState, sortHistoryState]);
+
+  useEffect(() => {
+    if (loopingIdxState < sortHistoryState.length - 1 && isPlayingState) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = setTimeout(() => {
+        setLoopingIdx(loopingIdx + 1);
+      }, 50);
+    } else {
+      setIsPlayingState(false);
+    }
+  }, [loopingIdxState, isPlayingState, sortHistoryState.length]);
 
   return (
     <section>
@@ -61,7 +91,7 @@ export default function AlgoPage() {
           <button
             className={classes.boutons}
             onClick={() => {
-              triageABulles();
+              triageABulles(Chart.tableau);
             }}
           >
             Tri à bulles
@@ -70,7 +100,11 @@ export default function AlgoPage() {
           <button
             className={classes.boutons}
             onClick={() => {
-              triageInsertion();
+              // console.log(
+              //   'chartRef.current.getTableau()',
+              //   chartRef.current.getTableau()
+              // );
+              triInsertion(chartRef.current.getTableau());
             }}
           >
             Tri par insertion
@@ -78,7 +112,14 @@ export default function AlgoPage() {
         </div>
         {/* <div>params.count: {params.count}</div>
         <div>countState: {countState}</div> */}
-        {<Chart countState={countState} />}
+        {
+          <Chart
+            ref={chartRef}
+            countState={countState}
+            loopingIdx={loopingIdx}
+            sortHistoryState={sortHistoryState}
+          />
+        }
       </Card>
     </section>
   );
