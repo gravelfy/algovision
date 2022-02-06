@@ -2,7 +2,6 @@ import { useMemo, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import Layout from './components/layout/Layout';
-import { AnimContext } from './logic/animation';
 import { ParamsContext } from './logic/ParamsContext';
 import AlgoPage from './pages/AlgoPage';
 import AlgorePage from './pages/AlgorePage';
@@ -16,34 +15,34 @@ function App() {
   const value = useMemo(() => ({ params, setParams }), [params, setParams]);
 
   // const AnimContext = createContext();
+  // ! Destroy this unused code
+  // const [isPlaying, setIsPlaying] = useState(false);
+  // const [count, setCount] = useState(20);
+  // const [loopingIdx, setLoopingIdx] = useState(0);
+  // const [ordre, setOrdre] = useState(0);
+  // const [sortHistory, setSortHistory] = useState(0);
 
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [count, setCount] = useState(30);
-  const [loopingIdx, setLoopingIdx] = useState(0);
-  const [ordre, setOrdre] = useState(0);
-  const [sortHistory, setSortHistory] = useState(0);
+  // const MyProvider = (props) => {
+  //   const [isPlaying, setIsPlaying] = useState(false);
+  //   const [count, setCount] = useState(30);
+  //   const [loopingIdx, setLoopingIdx] = useState(0);
+  //   const [ordre, setOrdre] = useState(0);
+  //   const [sortHistory, setSortHistory] = useState(0);
 
-  const MyProvider = (props) => {
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [count, setCount] = useState(30);
-    const [loopingIdx, setLoopingIdx] = useState(0);
-    const [ordre, setOrdre] = useState(0);
-    const [sortHistory, setSortHistory] = useState(0);
-
-    return (
-      <AnimContext.Provider
-        value={{
-          isPlaying: [isPlaying, setIsPlaying],
-          count: [count, setCount],
-          looping: [loopingIdx, setLoopingIdx],
-          ordre: [ordre, setOrdre],
-          sortHistory: [sortHistory, setSortHistory],
-        }}
-      >
-        {props.chidren}
-      </AnimContext.Provider>
-    );
-  };
+  //   return (
+  //     <AnimContext.Provider
+  //       value={{
+  //         isPlaying: [isPlaying, setIsPlaying],
+  //         count: [count, setCount],
+  //         loopingIdx: [loopingIdx, setLoopingIdx],
+  //         ordre: [ordre, setOrdre],
+  //         sortHistory: [sortHistory, setSortHistory],
+  //       }}
+  //     >
+  //       {props.chidren}
+  //     </AnimContext.Provider>
+  //   );
+  // };
 
   // const [context, setContext] = useState(contextObj);
   const [context, setContext] = useState('default context value');
@@ -62,7 +61,7 @@ function App() {
               {/* <AlgoPage /> */}
             </Route>
             <Route path="/commentaires">
-              <AlgorePage countState="30" />
+              <AlgorePage countState="13" />
               {/* <AlgoPage /> */}
             </Route>
             <Route path="/favoris">

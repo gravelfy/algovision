@@ -3,81 +3,101 @@ import { createArray, shuffle } from '../../algos/shuffle';
 import Bar from './Bar';
 import classes from './Chart.module.css';
 
-// const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
+const eGood = '';
 
-// console.log(ordre, sortHistory);
-// useEffect(() => {
-//   setOrdre(sortHistory[loopingVar]);
-// }, [loopingVar, sortHistory]);
-
-// useEffect(() => {
-//   if (loopingVar < sortHistory.length - 1 && playing) {
-//     clearTimeout(timeoutRef.current!);
-//     timeoutRef.current = setTimeout(() => {
-//       setLoopingVar(loopingVar + 1);
-//     }, 50);
-//   } else {
-//     setPlaying(false);
-//     //      setSortHistory(array);
-//   }
-// }, [loopingVar, playing, sortHistory.length]);
+// ! from algotri
+// TODO refactor vars
 
 export default class Chart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      countState: '',
+      count: this.props.count,
+      ordre: [],
+      loopingIdx: this.props.loopingIdx,
+      isPlaying: this.props.isPlaying,
+      sortHistory: this.props.sortHistory,
       tableau: [],
-      //    tableau: new Array()
+      msg: 'Message',
     };
-    //    this.state.tableau = new Array();
   }
 
   getTableau() {
+    // console.log('GET TABLEAU');
     return this.state.tableau;
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({ value: nextProps.value });
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    // console.log('componentWillReceiveProps countSt', this.state.count);
+    // this.setState({ count: nextProps.count });
+    // //this.setState({ isPlaying: nextProps.isPlaying });
+    // this.setState({ loopingIdx: nextProps.loopingIdx });
+    // console.log('componentWillReceiveProps loopingIdx', this.state.loopingIdx);
   }
 
-  componentDidMount() {
-    // if (this.state.tableau.length !== this.props.countState)
-    //   this.setState({ tableau: createArray(this.props.countState) });
-    // this.setState({ tableau: shuffle(this.state.tableau) });
+  static getDerivedStateFromProps(props, state) {
+    if (props.count !== state.count) {
+      return {
+        count: props.count,
+      };
+    }
+    if (props.isPlaying !== state.isPlaying) {
+      return {
+        isPlaying: props.isPlaying,
+      };
+    }
+    if (props.loopingIdx !== state.loopingIdx) {
+      return {
+        loopingIdx: props.loopingIdx,
+      };
+    }
+    return null;
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   let newName = 'Obaseki Nosa';
-  //   // Don't forget to compare states
-  //   if (prevState.countState !== this.state.countState) {
-  //     // Write logic here.
-  //     this.setState({ tableau: createArray(this.props.countState) });
-  //     this.setState({ tableau: shuffle(this.state.tableau) });
-  //   }
-  //   if (prevState && prevState.tableau.length !== prevProps.countState) {
-  //   }
-  // }
+  componentDidMount() {}
+
+  componentDidUpdate(prevProps, prevState) {
+    // Don't forget to compare states
+    if (prevState.count !== this.state.count) {
+      // Write logic here.
+      this.setState({ msg: 'reshuffle' });
+
+      this.setState({ tableau: shuffle(createArray(this.props.count)) });
+    }
+    if (
+      prevState.loopingIdx !== this.state.loopingIdx &&
+      this.state.loopingIdx !== 0
+    ) {
+      this.setState({ msg: 'Animation' });
+      this.setState({ ordre: this.state.sortHistory[this.state.loopingIdx] });
+      this.setState({ tableau: this.state.sortHistory[this.state.loopingIdx] });
+    }
+    if (prevState.tableau.length !== this.state.tableau.length) {
+      this.setState({ ordre: this.state.tableau });
+    }
+  }
 
   render() {
-    // console.log('tableau.length', this.state.tableau.length);
-    // console.log('tableau', this.state.tableau);
-    // console.log('tableau', this.state.tableau);
-    // console.log('Tableau()', this.getTableau());
-
-    this.state.tableau = createArray(this.props.countState);
-    this.state.tableau = shuffle(this.state.tableau);
-
     return (
       <>
+        <div>
+          count: {this.state.count} &nbsp; | {this.state.msg}
+        </div>
         <div className={classes.chart}>
-          {Object.values(this.state.tableau).map((barre) => (
-            <Bar barre={barre} cpc={this.state.tableau.length}>
+          {Object.values(this.state.tableau).map((barre, i) => (
+            <Bar barre={barre} cpc={this.state.tableau.length} key={i}>
               {' '}
               {barre}
             </Bar>
           ))}
         </div>
+        <div border={this.state.isPlaying ? 1 : 0}>
+          loopingIdx: {this.state.loopingIdx} &nbsp; | isPlaying:{' '}
+          {this.state.isPlaying} &nbsp; | Tableau.length{' '}
+          {this.state.tableau.length}
+        </div>
+        <div>ordre: {this.state.ordre}</div>
+        <div>sortHistory: {this.state.sortHistory}</div>
       </>
     );
   }

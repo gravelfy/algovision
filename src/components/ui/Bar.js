@@ -8,7 +8,7 @@ function Bar(props) {
 
   return (
     <div className={classes.column}>
-      <div className={classes.barre} key={n} style={{ flexBasis: h }}>
+      <div className={classes.barre} style={{ flexBasis: h }}>
         {n}
       </div>
     </div>

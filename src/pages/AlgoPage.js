@@ -11,9 +11,10 @@ export default function AlgoPage() {
 
   const [params, setParams] = useContext(ParamsContext);
 
-  const [loopingIdx, setLoopingIdx] = useState(0);
+  //const [loopingIdx, setLoopingIdx] = useState(0);
 
   const chartRef = useRef();
+  //const chartRef = createRef();
 
   console.log('params ', params);
   //  console.log(JSON.stringify(params));
@@ -22,6 +23,7 @@ export default function AlgoPage() {
   const pdata = JSON.parse(JSON.stringify(params));
 
   console.log('pdata', pdata);
+  console.log('pdata', pdata.loopingIdx);
 
   const [isPlayingState, setIsPlayingState] = useState(pdata.isPlaying);
   const [countState, setCountState] = useState(pdata.count);
@@ -30,8 +32,28 @@ export default function AlgoPage() {
   const [sortHistoryState, setSortHistoryState] = useState(pdata.sortHistory);
 
   function triInsertion(pt) {
-    setIsPlayingState(false);
-    setSortHistoryState(triageInsertion(chartRef.current.getTableau()));
+    //setIsPlayingState(false);
+    setLoopingIdxState(0);
+    setSortHistoryState([]);
+    let tempHistory = [];
+
+    tempHistory = triageInsertion(chartRef.current.state.tableau);
+    console.log(
+      'triInsertion chartRef.current.state.tableau',
+      chartRef.current.state.tableau
+    );
+    console.log('triInsertion tempHistory  ', tempHistory);
+
+    setSortHistoryState(tempHistory);
+
+    // setSortHistoryState(() => {
+    //   return triageInsertion(chartRef.current.state.tableau);
+    // });
+    console.log('triInsertion sortHist', sortHistoryState);
+    //console.log('chartRef.current.getTableau()', chartRef.current.getTableau());
+    chartRef.current.setState({ sortHistory: tempHistory });
+    console.log('triInsertion ===== sortHist', sortHistoryState);
+
     setIsPlayingState(true);
   }
 
@@ -39,17 +61,29 @@ export default function AlgoPage() {
 
   const timeoutRef = useRef(setTimeout);
 
-  //console.log(ordre, sortHistory);
   useEffect(() => {
-    setOrdreState(sortHistoryState[loopingIdxState]);
-  }, [loopingIdxState, sortHistoryState]);
+    console.log('Premier render ------------------');
+  }, []);
+
+  //console.log(ordre, sortHistory);
+  // useEffect(() => {
+  //   console.log('useEffect 2 ');
+  //   console.log(sortHistoryState);
+  //   setOrdreState(sortHistoryState[loopingIdxState]);
+  // }, [sortHistoryState, loopingIdxState]);
 
   useEffect(() => {
+    console.log('useEffect 3 !!!');
+    console.log('isPlayingState', isPlayingState);
+    console.log('loopingIdxState', loopingIdxState);
+    console.log('sortHistoryState.length - 1', sortHistoryState.length - 1);
+
     if (loopingIdxState < sortHistoryState.length - 1 && isPlayingState) {
       clearTimeout(timeoutRef.current);
       timeoutRef.current = setTimeout(() => {
-        setLoopingIdx(loopingIdx + 1);
-      }, 50);
+        console.log('loopingIdxState', loopingIdxState);
+        setLoopingIdxState(loopingIdxState + 1);
+      }, 300);
     } else {
       setIsPlayingState(false);
     }
@@ -69,7 +103,7 @@ export default function AlgoPage() {
               setParams(params);
               // Chart.setCountState(countState);
               // setOrdreState(initNombres(countState));
-              // setLoopingState(0);
+              setLoopingIdxState(0);
             }}
           >
             moins 1
@@ -82,7 +116,7 @@ export default function AlgoPage() {
               params.count = params.count + 1;
               setParams(params);
               // setOrdreState(initNombres(countState));
-              // setLoopingState(0);
+              setLoopingIdxState(0);
             }}
           >
             plus 1
@@ -104,7 +138,9 @@ export default function AlgoPage() {
               //   'chartRef.current.getTableau()',
               //   chartRef.current.getTableau()
               // );
+
               triInsertion(chartRef.current.getTableau());
+              console.log(chartRef.current.state.tableau);
             }}
           >
             Tri par insertion
@@ -115,12 +151,14 @@ export default function AlgoPage() {
         {
           <Chart
             ref={chartRef}
-            countState={countState}
-            loopingIdx={loopingIdx}
-            sortHistoryState={sortHistoryState}
+            count={countState}
+            loopingIdx={loopingIdxState}
+            isPlaying={isPlayingState}
+            sortHistory={sortHistoryState}
           />
         }
       </Card>
+      {/* <div>{chartRef.current.state.tableau}</div> */}
     </section>
   );
 }
