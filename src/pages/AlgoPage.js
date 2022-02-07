@@ -31,6 +31,24 @@ export default function AlgoPage() {
   const [ordreState, setOrdreState] = useState(pdata.ordre);
   const [sortHistoryState, setSortHistoryState] = useState(pdata.sortHistory);
 
+  function triABulles(pt) {
+    //setIsPlayingState(false);
+    setLoopingIdxState(0);
+    setSortHistoryState([]);
+    let tempHistory = [];
+
+    tempHistory = triageABulles(chartRef.current.state.tableau);
+
+    setSortHistoryState(tempHistory);
+
+    console.log('triBulles sortHist', sortHistoryState);
+    //console.log('chartRef.current.getTableau()', chartRef.current.getTableau());
+    chartRef.current.setState({ sortHistory: tempHistory });
+    console.log('triBulles ===== sortHist', sortHistoryState);
+
+    setIsPlayingState(true);
+  }
+
   function triInsertion(pt) {
     //setIsPlayingState(false);
     setLoopingIdxState(0);
@@ -38,11 +56,11 @@ export default function AlgoPage() {
     let tempHistory = [];
 
     tempHistory = triageInsertion(chartRef.current.state.tableau);
-    console.log(
-      'triInsertion chartRef.current.state.tableau',
-      chartRef.current.state.tableau
-    );
-    console.log('triInsertion tempHistory  ', tempHistory);
+    // console.log(
+    //   'triInsertion chartRef.current.state.tableau',
+    //   chartRef.current.state.tableau
+    // );
+    // console.log('triInsertion tempHistory  ', tempHistory);
 
     setSortHistoryState(tempHistory);
 
@@ -125,7 +143,7 @@ export default function AlgoPage() {
           <button
             className={classes.boutons}
             onClick={() => {
-              triageABulles(Chart.tableau);
+              triABulles(chartRef.current.state.tableau);
             }}
           >
             Tri à bulles
@@ -134,11 +152,6 @@ export default function AlgoPage() {
           <button
             className={classes.boutons}
             onClick={() => {
-              // console.log(
-              //   'chartRef.current.getTableau()',
-              //   chartRef.current.getTableau()
-              // );
-
               triInsertion(chartRef.current.getTableau());
               console.log(chartRef.current.state.tableau);
             }}

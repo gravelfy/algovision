@@ -38,7 +38,9 @@ export function triageInsertion(tab) {
   return historyArray;
 }
 
-/* ////////// Algo Bulles  \\\\\\\\\\\\\\\
+/*
+ ! Pseudo code 
+ // ! //////// Algo Bulles  \\\\\\\\\\\\\ ! \\
  Tri-Bulles(Tab: Tableau, nbreElements: Entier)
  Pour (i = 1 à n) Faire
      Pour (j = n à i+1) Faire
@@ -65,5 +67,34 @@ export function triageABulles(tab) {
       }
     }
   }
+  return historyArray;
+}
+
+// ! Pseudo code
+// Tri-Fusion (Tab : Tableau, p : Entier, r : Entier)
+//  Si (p < r)
+
+// q ← [(p + r) / 2]
+// //partager la suite des éléments en 2.
+
+// Tri-Fusion (Tab, p, q)
+
+// Tri-Fusion (Tab, q+1, r)
+
+// Fusion (Tab, p, q, r)
+//  FinSi
+
+export function triageFusion(tab, depart, fin) {
+  //
+  var liste = [...tab];
+  var historyArray = [];
+  historyArray = [[...liste]];
+  //setSortHistory(historyArray);
+  var q = (depart + fin) / 2;
+
+  triageFusion(tab, depart, q);
+  triageFusion(tab, q + 1, fin);
+
+  historyArray.push([...liste]);
   return historyArray;
 }
