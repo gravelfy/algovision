@@ -1,4 +1,10 @@
-.boutons {
+.boutonsPlusMoins {
+  background-color: #000277;
+  color: white;
+  width: 12.5%;
+}
+
+.boutonsTri {
   background-color: #000277;
   color: white;
   width: 25%;

@@ -22,19 +22,6 @@ export default class Chart extends Component {
     };
   }
 
-  getTableau() {
-    // console.log('GET TABLEAU');
-    return this.state.tableau;
-  }
-
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    // console.log('componentWillReceiveProps countSt', this.state.count);
-    // this.setState({ count: nextProps.count });
-    // //this.setState({ isPlaying: nextProps.isPlaying });
-    // this.setState({ loopingIdx: nextProps.loopingIdx });
-    // console.log('componentWillReceiveProps loopingIdx', this.state.loopingIdx);
-  }
-
   static getDerivedStateFromProps(props, state) {
     if (props.count !== state.count) {
       return {
@@ -54,14 +41,15 @@ export default class Chart extends Component {
     return null;
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    if (this.state.count > 0) {
+      this.setState({ tableau: shuffle(createArray(this.props.count)) });
+    }
+  }
 
   componentDidUpdate(prevProps, prevState) {
-    // Don't forget to compare states
     if (prevState.count !== this.state.count) {
-      // Write logic here.
       this.setState({ msg: 'reshuffle' });
-
       this.setState({ tableau: shuffle(createArray(this.props.count)) });
     }
     if (
@@ -80,9 +68,6 @@ export default class Chart extends Component {
   render() {
     return (
       <>
-        <div>
-          count: {this.state.count} &nbsp; | {this.state.msg}
-        </div>
         <div className={classes.chart}>
           {Object.values(this.state.tableau).map((barre, i) => (
             <Bar barre={barre} cpc={this.state.tableau.length} key={i}>
@@ -91,13 +76,6 @@ export default class Chart extends Component {
             </Bar>
           ))}
         </div>
-        <div border={this.state.isPlaying ? 1 : 0}>
-          loopingIdx: {this.state.loopingIdx} &nbsp; | isPlaying:{' '}
-          {this.state.isPlaying} &nbsp; | Tableau.length{' '}
-          {this.state.tableau.length}
-        </div>
-        <div>ordre: {this.state.ordre}</div>
-        <div>sortHistory: {this.state.sortHistory}</div>
       </>
     );
   }

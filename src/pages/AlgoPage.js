@@ -6,18 +6,11 @@ import { ParamsContext } from '../logic/ParamsContext';
 import classes from './AlgoPage.module.css';
 
 export default function AlgoPage() {
-  // const { isPlaying, count, looping, ordre, sortHistory } =
-  //   useContext(AnimContext);
-
   const [params, setParams] = useContext(ParamsContext);
 
-  //const [loopingIdx, setLoopingIdx] = useState(0);
-
   const chartRef = useRef();
-  //const chartRef = createRef();
 
   console.log('params ', params);
-  //  console.log(JSON.stringify(params));
 
   // dirty hack
   const pdata = JSON.parse(JSON.stringify(params));
@@ -27,121 +20,110 @@ export default function AlgoPage() {
 
   const [isPlayingState, setIsPlayingState] = useState(pdata.isPlaying);
   const [countState, setCountState] = useState(pdata.count);
-  const [loopingIdxState, setLoopingIdxState] = useState(pdata.loopingIdx);
-  const [ordreState, setOrdreState] = useState(pdata.ordre);
-  const [sortHistoryState, setSortHistoryState] = useState(pdata.sortHistory);
+  const [animIdxState, setAnimIdxState] = useState(pdata.animIdx);
+  //const [ordreState, setOrdreState] = useState(pdata.ordre);
+  const [animFramesState, setAnimFramesState] = useState(pdata.animFrames);
 
   function triABulles(pt) {
-    //setIsPlayingState(false);
-    setLoopingIdxState(0);
-    setSortHistoryState([]);
+    setAnimIdxState(0);
+    setAnimFramesState([]);
     let tempHistory = [];
 
     tempHistory = triageABulles(chartRef.current.state.tableau);
 
-    setSortHistoryState(tempHistory);
+    setAnimFramesState(tempHistory);
 
-    console.log('triBulles sortHist', sortHistoryState);
-    //console.log('chartRef.current.getTableau()', chartRef.current.getTableau());
+    console.log('triBulles sortHist', animFramesState);
+
     chartRef.current.setState({ sortHistory: tempHistory });
-    console.log('triBulles ===== sortHist', sortHistoryState);
+    console.log('triBulles ===== sortHist', animFramesState);
 
     setIsPlayingState(true);
   }
 
   function triInsertion(pt) {
-    //setIsPlayingState(false);
-    setLoopingIdxState(0);
-    setSortHistoryState([]);
+    setAnimIdxState(0);
+    setAnimFramesState([]);
     let tempHistory = [];
 
     tempHistory = triageInsertion(chartRef.current.state.tableau);
-    // console.log(
-    //   'triInsertion chartRef.current.state.tableau',
-    //   chartRef.current.state.tableau
-    // );
-    // console.log('triInsertion tempHistory  ', tempHistory);
 
-    setSortHistoryState(tempHistory);
+    setAnimFramesState(tempHistory);
 
-    // setSortHistoryState(() => {
-    //   return triageInsertion(chartRef.current.state.tableau);
-    // });
-    console.log('triInsertion sortHist', sortHistoryState);
-    //console.log('chartRef.current.getTableau()', chartRef.current.getTableau());
+    console.log('triInsertion sortHist', animFramesState);
+
     chartRef.current.setState({ sortHistory: tempHistory });
-    console.log('triInsertion ===== sortHist', sortHistoryState);
+    console.log('triInsertion ===== sortHist', animFramesState);
 
     setIsPlayingState(true);
   }
 
-  //const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
-
   const timeoutRef = useRef(setTimeout);
 
   useEffect(() => {
-    console.log('Premier render ------------------');
-  }, []);
-
-  //console.log(ordre, sortHistory);
-  // useEffect(() => {
-  //   console.log('useEffect 2 ');
-  //   console.log(sortHistoryState);
-  //   setOrdreState(sortHistoryState[loopingIdxState]);
-  // }, [sortHistoryState, loopingIdxState]);
-
-  useEffect(() => {
-    console.log('useEffect 3 !!!');
-    console.log('isPlayingState', isPlayingState);
-    console.log('loopingIdxState', loopingIdxState);
-    console.log('sortHistoryState.length - 1', sortHistoryState.length - 1);
-
-    if (loopingIdxState < sortHistoryState.length - 1 && isPlayingState) {
+    if (animIdxState < animFramesState.length - 1 && isPlayingState) {
       clearTimeout(timeoutRef.current);
       timeoutRef.current = setTimeout(() => {
-        console.log('loopingIdxState', loopingIdxState);
-        setLoopingIdxState(loopingIdxState + 1);
-      }, 300);
+        console.log('loopingIdxState', animIdxState);
+        setAnimIdxState(animIdxState + 1);
+      }, 50);
     } else {
       setIsPlayingState(false);
     }
-  }, [loopingIdxState, isPlayingState, sortHistoryState.length]);
+  }, [animIdxState, isPlayingState, animFramesState.length]);
 
   return (
     <section>
-      <h1>Visualisation d'algorithme</h1>
+      <h1>Tableau de {countState} éléments</h1>
       <Card>
         <div className={classes.boutonsRow}>
           <button
-            className={classes.boutons}
+            className={classes.boutonsPlusMoins}
             onClick={() => {
-              setCountState(countState - 1);
-              params.count = params.count - 1;
-              //params.count = countState;
-              setParams(params);
-              // Chart.setCountState(countState);
-              // setOrdreState(initNombres(countState));
-              setLoopingIdxState(0);
+              if (countState > 10) {
+                setCountState(countState - 10);
+                setAnimIdxState(0);
+              }
             }}
           >
-            moins 1
+            -10
           </button>
 
           <button
-            className={classes.boutons}
+            className={classes.boutonsPlusMoins}
             onClick={() => {
-              setCountState(countState + 1);
-              params.count = params.count + 1;
-              setParams(params);
-              // setOrdreState(initNombres(countState));
-              setLoopingIdxState(0);
+              if (countState > 1) {
+                setCountState(countState - 1);
+                setAnimIdxState(0);
+              }
             }}
           >
-            plus 1
+            -1
           </button>
-
           <button
-            className={classes.boutons}
+            className={classes.boutonsPlusMoins}
+            onClick={() => {
+              if (countState < 400) {
+                setCountState(countState + 1);
+                setAnimIdxState(0);
+              }
+            }}
+          >
+            +1
+          </button>
+          <button
+            className={classes.boutonsPlusMoins}
+            onClick={() => {
+              if (countState < 391) {
+                setCountState(countState + 10);
+                setAnimIdxState(0);
+              }
+            }}
+          >
+            +10
+          </button>
+          <button
+            className={classes.boutonsTri}
             onClick={() => {
               triABulles(chartRef.current.state.tableau);
             }}
@@ -150,28 +132,24 @@ export default function AlgoPage() {
           </button>
 
           <button
-            className={classes.boutons}
+            className={classes.boutonsTri}
             onClick={() => {
-              triInsertion(chartRef.current.getTableau());
-              console.log(chartRef.current.state.tableau);
+              triInsertion(chartRef.current.state.tableau);
             }}
           >
             Tri par insertion
           </button>
         </div>
-        {/* <div>params.count: {params.count}</div>
-        <div>countState: {countState}</div> */}
         {
           <Chart
             ref={chartRef}
             count={countState}
-            loopingIdx={loopingIdxState}
+            loopingIdx={animIdxState}
             isPlaying={isPlayingState}
-            sortHistory={sortHistoryState}
+            sortHistory={animFramesState}
           />
         }
       </Card>
-      {/* <div>{chartRef.current.state.tableau}</div> */}
     </section>
   );
 }
