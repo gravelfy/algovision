@@ -3,8 +3,6 @@ import { createArray, shuffle } from '../../algos/shuffle';
 import Bar from './Bar';
 import classes from './Chart.module.css';
 
-const eGood = '';
-
 // ! from algotri
 // TODO refactor vars
 
@@ -14,9 +12,9 @@ export default class Chart extends Component {
     this.state = {
       count: this.props.count,
       ordre: [],
-      loopingIdx: this.props.loopingIdx,
+      animIdx: this.props.animIdx,
       isPlaying: this.props.isPlaying,
-      sortHistory: this.props.sortHistory,
+      animFrames: this.props.animFrames,
       tableau: [],
       msg: 'Message',
     };
@@ -33,9 +31,9 @@ export default class Chart extends Component {
         isPlaying: props.isPlaying,
       };
     }
-    if (props.loopingIdx !== state.loopingIdx) {
+    if (props.animIdx !== state.animIdx) {
       return {
-        loopingIdx: props.loopingIdx,
+        animIdx: props.animIdx,
       };
     }
     return null;
@@ -49,16 +47,13 @@ export default class Chart extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.count !== this.state.count) {
-      this.setState({ msg: 'reshuffle' });
+      //      this.setState({ msg: 'reshuffle' });
       this.setState({ tableau: shuffle(createArray(this.props.count)) });
     }
-    if (
-      prevState.loopingIdx !== this.state.loopingIdx &&
-      this.state.loopingIdx !== 0
-    ) {
-      this.setState({ msg: 'Animation' });
-      this.setState({ ordre: this.state.sortHistory[this.state.loopingIdx] });
-      this.setState({ tableau: this.state.sortHistory[this.state.loopingIdx] });
+    if (prevState.animIdx !== this.state.animIdx && this.state.animIdx !== 0) {
+      //    this.setState({ msg: 'Animation' });
+      this.setState({ ordre: this.state.animFrames[this.state.animIdx] });
+      this.setState({ tableau: this.state.animFrames[this.state.animIdx] });
     }
     if (prevState.tableau.length !== this.state.tableau.length) {
       this.setState({ ordre: this.state.tableau });

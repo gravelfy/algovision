@@ -1,13 +1,18 @@
 .boutonsPlusMoins {
   background-color: #000277;
   color: white;
-  width: 12.5%;
+  width: 25%;
 }
 
 .boutonsTri {
   background-color: #000277;
   color: white;
-  width: 25%;
+  width: 33.33%;
+}
+
+button:disabled {
+  background-color: darkgray;
+  color: dimgray;
 }
 
 @media screen and (min-width: 601px) {

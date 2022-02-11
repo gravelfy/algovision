@@ -5,6 +5,7 @@ import Layout from './components/layout/Layout';
 import { AlgoParameters } from './logic/AlgoParams';
 import { ParamsContext } from './logic/ParamsContext';
 import AlgoPage from './pages/AlgoPage';
+import AproposPage from './pages/AproposPage';
 
 function App() {
   const [params, setParams] = useState(AlgoParameters());
@@ -17,6 +18,10 @@ function App() {
             <Route path="/algo-react" exact>
               {/* <Context.Provider value={[context, setContext]}> */}
               <AlgoPage />
+            </Route>
+            <Route path="/apropos" exact>
+              {/* <Context.Provider value={[context, setContext]}> */}
+              <AproposPage />
             </Route>
           </Switch>
         </ParamsContext.Provider>

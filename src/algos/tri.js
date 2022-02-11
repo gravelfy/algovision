@@ -17,11 +17,9 @@
 
 //const triageInsertion = (tab) => {
 export function triageInsertion(tab) {
-  console.log('- - - - - - - - - - triage INSERTION - - - - - - - - - - - - ');
-  console.log(tab);
-  var historyArray = [];
+  var animFrames = [];
   var liste = [...tab];
-  historyArray = [[...liste]];
+  animFrames = [[...liste]];
   var size = liste.length;
 
   for (var j = 1; j < size; j++) {
@@ -32,10 +30,9 @@ export function triageInsertion(tab) {
       i--;
     }
     liste[i + 1] = cle;
-    historyArray.push([...liste]);
+    animFrames.push([...liste]);
   }
-  console.log(historyArray);
-  return historyArray;
+  return animFrames;
 }
 
 /*
@@ -54,47 +51,41 @@ export function triageInsertion(tab) {
 export function triageABulles(tab) {
   //
   var liste = [...tab];
-  var historyArray = [];
-  historyArray = [[...liste]];
-  //setSortHistory(historyArray);
+  var animFrames = [];
+  animFrames = [[...liste]];
   var size = liste.length;
 
   for (var i = 0; i < size; i++) {
     for (var j = size; j >= i + 1; j--) {
       if (liste[j] < liste[j - 1]) {
         [liste[j], liste[j - 1]] = [liste[j - 1], liste[j]];
-        historyArray.push([...liste]);
+        animFrames.push([...liste]);
       }
     }
   }
-  return historyArray;
+  return animFrames;
 }
 
 // ! Pseudo code
 // Tri-Fusion (Tab : Tableau, p : Entier, r : Entier)
 //  Si (p < r)
-
 // q ← [(p + r) / 2]
 // //partager la suite des éléments en 2.
-
 // Tri-Fusion (Tab, p, q)
-
 // Tri-Fusion (Tab, q+1, r)
-
 // Fusion (Tab, p, q, r)
 //  FinSi
 
 export function triageFusion(tab, depart, fin) {
   //
   var liste = [...tab];
-  var historyArray = [];
-  historyArray = [[...liste]];
-  //setSortHistory(historyArray);
+  var animFrames = [];
+  animFrames = [[...liste]];
   var q = (depart + fin) / 2;
 
   triageFusion(tab, depart, q);
   triageFusion(tab, q + 1, fin);
 
-  historyArray.push([...liste]);
-  return historyArray;
+  animFrames.push([...liste]);
+  return animFrames;
 }

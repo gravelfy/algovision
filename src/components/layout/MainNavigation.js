@@ -1,14 +1,19 @@
-//import FavoritesContext from '../../store/favorites-context';
 import classes from './MainNavigation.module.css';
 
 function MainNavigation() {
-  //   const favoritesCtx = useContext(FavoritesContext);
-
   return (
     <header className={classes.header}>
-      <div className={classes.logo}>Visualisation d'algorithme de tri</div>
+      <div className={classes.logo}>Algorithmes de tri</div>
+
       <nav>
-        <ul></ul>
+        <ul>
+          {/* <li>
+            <Link to="/algo-react">Algorithmes</Link>
+          </li>
+          <li>
+            <Link onClick={loadApropos()}>À propos</Link>
+          </li> */}
+        </ul>
       </nav>
     </header>
   );

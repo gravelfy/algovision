@@ -1,4 +1,5 @@
 import { useContext, useEffect, useRef, useState } from 'react';
+import { shuffle } from '../algos/shuffle';
 import { triageABulles, triageInsertion } from '../algos/tri';
 import Card from '../components/ui/Card';
 import Chart from '../components/ui/Chart';
@@ -6,69 +7,84 @@ import { ParamsContext } from '../logic/ParamsContext';
 import classes from './AlgoPage.module.css';
 
 export default function AlgoPage() {
+  // const [isButtonEnabled, setIsButtonEnabled] = useToggle();
+  const [AUCUN, ABULLES, INSERTION] = [0, 1, 2];
+  const [currentAlgo, setCurrentAlgo] = useState(AUCUN);
+  const [isBullesEnabled, setIsBullesEnabled] = useState(true);
+  const [isInsertionEnabled, setIsInsertionEnabled] = useState(true);
+  const [isMelangerEnabled, setIsMelangerEnabled] = useState(true);
+  const [isPauseEnabled, setIsPauseEnabled] = useState();
+
   const [params, setParams] = useContext(ParamsContext);
 
   const chartRef = useRef();
 
-  console.log('params ', params);
-
-  // dirty hack
   const pdata = JSON.parse(JSON.stringify(params));
-
-  console.log('pdata', pdata);
-  console.log('pdata', pdata.loopingIdx);
 
   const [isPlayingState, setIsPlayingState] = useState(pdata.isPlaying);
   const [countState, setCountState] = useState(pdata.count);
   const [animIdxState, setAnimIdxState] = useState(pdata.animIdx);
-  //const [ordreState, setOrdreState] = useState(pdata.ordre);
   const [animFramesState, setAnimFramesState] = useState(pdata.animFrames);
 
-  function triABulles(pt) {
+  function melanger(pt) {
     setAnimIdxState(0);
     setAnimFramesState([]);
-    let tempHistory = [];
+    let tempFrames = [];
 
-    tempHistory = triageABulles(chartRef.current.state.tableau);
+    tempFrames = shuffle(chartRef.current.state.tableau);
+    setAnimFramesState(tempFrames);
+    chartRef.current.setState({ animFrames: tempFrames });
 
-    setAnimFramesState(tempHistory);
+    setIsInsertionEnabled(true);
+    setIsBullesEnabled(true);
+    setIsPlayingState(false);
+  }
 
-    console.log('triBulles sortHist', animFramesState);
+  function triABulles(pt) {
+    setCurrentAlgo(ABULLES);
+    setAnimIdxState(0);
+    setAnimFramesState([]);
+    let tempFrames = [];
 
-    chartRef.current.setState({ sortHistory: tempHistory });
-    console.log('triBulles ===== sortHist', animFramesState);
-
+    tempFrames = triageABulles(chartRef.current.state.tableau);
+    setAnimFramesState(tempFrames);
+    chartRef.current.setState({ animFrames: tempFrames });
+    setIsInsertionEnabled(false);
+    setIsBullesEnabled(false);
+    setIsMelangerEnabled(false);
     setIsPlayingState(true);
   }
 
   function triInsertion(pt) {
+    setCurrentAlgo(INSERTION);
     setAnimIdxState(0);
     setAnimFramesState([]);
-    let tempHistory = [];
-
-    tempHistory = triageInsertion(chartRef.current.state.tableau);
-
-    setAnimFramesState(tempHistory);
-
-    console.log('triInsertion sortHist', animFramesState);
-
-    chartRef.current.setState({ sortHistory: tempHistory });
-    console.log('triInsertion ===== sortHist', animFramesState);
-
+    let tempFrames = [];
+    tempFrames = triageInsertion(chartRef.current.state.tableau);
+    setAnimFramesState(tempFrames);
+    chartRef.current.setState({ animFrames: tempFrames });
+    setIsInsertionEnabled(false);
+    setIsBullesEnabled(false);
+    setIsMelangerEnabled(false);
     setIsPlayingState(true);
   }
 
   const timeoutRef = useRef(setTimeout);
 
+  // useEffect(() => {
+  //   console.log('isBullesEnabled : ', isBullesEnabled);
+  //   console.log('isInsertionEnabled : ', isInsertionEnabled);
+  // }, [isBullesEnabled, isInsertionEnabled]);
+
   useEffect(() => {
     if (animIdxState < animFramesState.length - 1 && isPlayingState) {
       clearTimeout(timeoutRef.current);
       timeoutRef.current = setTimeout(() => {
-        console.log('loopingIdxState', animIdxState);
         setAnimIdxState(animIdxState + 1);
       }, 50);
     } else {
       setIsPlayingState(false);
+      setIsMelangerEnabled(true);
     }
   }, [animIdxState, isPlayingState, animFramesState.length]);
 
@@ -81,6 +97,8 @@ export default function AlgoPage() {
             className={classes.boutonsPlusMoins}
             onClick={() => {
               if (countState > 10) {
+                setIsBullesEnabled(true);
+                setIsInsertionEnabled(true);
                 setCountState(countState - 10);
                 setAnimIdxState(0);
               }
@@ -93,6 +111,8 @@ export default function AlgoPage() {
             className={classes.boutonsPlusMoins}
             onClick={() => {
               if (countState > 1) {
+                setIsBullesEnabled(true);
+                setIsInsertionEnabled(true);
                 setCountState(countState - 1);
                 setAnimIdxState(0);
               }
@@ -104,6 +124,8 @@ export default function AlgoPage() {
             className={classes.boutonsPlusMoins}
             onClick={() => {
               if (countState < 400) {
+                setIsBullesEnabled(true);
+                setIsInsertionEnabled(true);
                 setCountState(countState + 1);
                 setAnimIdxState(0);
               }
@@ -115,6 +137,8 @@ export default function AlgoPage() {
             className={classes.boutonsPlusMoins}
             onClick={() => {
               if (countState < 391) {
+                setIsBullesEnabled(true);
+                setIsInsertionEnabled(true);
                 setCountState(countState + 10);
                 setAnimIdxState(0);
               }
@@ -122,34 +146,67 @@ export default function AlgoPage() {
           >
             +10
           </button>
+        </div>
+        <div className={classes.boutonsRow}>
+          {/* <button
+            disabled={isButtonEnabled}
+            onClick={() => {
+              setIsButtonEnabled(!isButtonEnabled);
+            }}
+          >
+            {isButtonEnabled ? 'Togglé' : 'Clickez pour Toggler'}
+          </button> */}
+
           <button
             className={classes.boutonsTri}
+            disabled={!isBullesEnabled}
             onClick={() => {
+              //              setIsBullesEnabled(!isBullesEnabled);
               triABulles(chartRef.current.state.tableau);
             }}
           >
             Tri à bulles
           </button>
-
           <button
             className={classes.boutonsTri}
+            disabled={!isMelangerEnabled}
+            onClick={() => {
+              //            setIsMelangerEnabled(!isMelangerEnabled);
+              melanger(chartRef.current.state.tableau);
+            }}
+          >
+            Mélanger
+          </button>
+          <button
+            className={classes.boutonsTri}
+            disabled={!isInsertionEnabled}
             onClick={() => {
               triInsertion(chartRef.current.state.tableau);
             }}
           >
-            Tri par insertion
+            Tri insertion
           </button>
+          {/* <button
+            className={classes.boutonsTri}
+            disabled={isPauseEnabled}
+            onClick={() => {
+              setIsPauseEnabled(!isPauseEnabled);
+              // triInsertion(chartRef.current.state.tableau);
+            }}
+          >
+            {isPauseEnabled ? 'Pause' : 'Continuer'}
+          </button> */}
         </div>
         {
           <Chart
             ref={chartRef}
             count={countState}
-            loopingIdx={animIdxState}
+            animIdx={animIdxState}
             isPlaying={isPlayingState}
-            sortHistory={animFramesState}
+            animFrames={animFramesState}
           />
         }
       </Card>
     </section>
   );
-}
+} // 3iqkj1en (code fred)
