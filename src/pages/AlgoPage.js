@@ -69,12 +69,21 @@ export default function AlgoPage() {
     setIsPlayingState(true);
   }
 
-  const timeoutRef = useRef(setTimeout);
+  function getCurrentAlgoTitle() {
+    switch (currentAlgo) {
+      case ABULLES: {
+        return ' : Tri à bulles';
+      }
+      case INSERTION: {
+        return ' : Tri insertion';
+      }
+      default: {
+        break;
+      }
+    }
+  }
 
-  // useEffect(() => {
-  //   console.log('isBullesEnabled : ', isBullesEnabled);
-  //   console.log('isInsertionEnabled : ', isInsertionEnabled);
-  // }, [isBullesEnabled, isInsertionEnabled]);
+  const timeoutRef = useRef(setTimeout);
 
   useEffect(() => {
     if (animIdxState < animFramesState.length - 1 && isPlayingState) {
@@ -83,6 +92,7 @@ export default function AlgoPage() {
         setAnimIdxState(animIdxState + 1);
       }, 50);
     } else {
+      setCurrentAlgo(AUCUN);
       setIsPlayingState(false);
       setIsMelangerEnabled(true);
     }
@@ -90,11 +100,14 @@ export default function AlgoPage() {
 
   return (
     <section>
-      <h1>Tableau de {countState} éléments</h1>
+      <h1>
+        Tableau de {countState} éléments {getCurrentAlgoTitle()}
+      </h1>
       <Card>
         <div className={classes.boutonsRow}>
           <button
             className={classes.boutonsPlusMoins}
+            disabled={!isMelangerEnabled}
             onClick={() => {
               if (countState > 10) {
                 setIsBullesEnabled(true);
@@ -109,6 +122,7 @@ export default function AlgoPage() {
 
           <button
             className={classes.boutonsPlusMoins}
+            disabled={!isMelangerEnabled}
             onClick={() => {
               if (countState > 1) {
                 setIsBullesEnabled(true);
@@ -122,6 +136,7 @@ export default function AlgoPage() {
           </button>
           <button
             className={classes.boutonsPlusMoins}
+            disabled={!isMelangerEnabled}
             onClick={() => {
               if (countState < 400) {
                 setIsBullesEnabled(true);
@@ -135,6 +150,7 @@ export default function AlgoPage() {
           </button>
           <button
             className={classes.boutonsPlusMoins}
+            disabled={!isMelangerEnabled}
             onClick={() => {
               if (countState < 391) {
                 setIsBullesEnabled(true);
@@ -159,6 +175,7 @@ export default function AlgoPage() {
 
           <button
             className={classes.boutonsTri}
+            style={{ fontWeight: currentAlgo === ABULLES ? 'bold' : 'normal' }}
             disabled={!isBullesEnabled}
             onClick={() => {
               //              setIsBullesEnabled(!isBullesEnabled);
@@ -179,6 +196,9 @@ export default function AlgoPage() {
           </button>
           <button
             className={classes.boutonsTri}
+            style={{
+              fontWeight: currentAlgo === INSERTION ? 'bold' : 'normal',
+            }}
             disabled={!isInsertionEnabled}
             onClick={() => {
               triInsertion(chartRef.current.state.tableau);
