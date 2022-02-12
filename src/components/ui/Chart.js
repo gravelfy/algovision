@@ -47,17 +47,17 @@ export default class Chart extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.count !== this.state.count) {
-      //      this.setState({ msg: 'reshuffle' });
+      //  this.setState({ msg: 'reshuffle' });
       this.setState({ tableau: shuffle(createArray(this.props.count)) });
     }
     if (prevState.animIdx !== this.state.animIdx && this.state.animIdx !== 0) {
-      //    this.setState({ msg: 'Animation' });
       this.setState({ ordre: this.state.animFrames[this.state.animIdx] });
       this.setState({ tableau: this.state.animFrames[this.state.animIdx] });
     }
-    if (prevState.tableau.length !== this.state.tableau.length) {
-      this.setState({ ordre: this.state.tableau });
-    }
+    // if (prevState.tableau.length !== this.state.tableau.length) {
+    //   // this.setState({ msg: ' I N U T I L E ' });
+    //   // this.setState({ ordre: this.state.tableau });
+    // }
   }
 
   render() {

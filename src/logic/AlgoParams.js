@@ -1,13 +1,13 @@
 // prettier-ignore
-export const AlgoParams = async () => {
-  return {
-    "isPlaying": 0,
-    "animIdx": 0,
-    "count": 21,
-    "ordre": [],
-    "animFrames": [],
-  };
-};
+// export const AlgoParams = async () => {
+//   return {
+//     "isPlaying": 0,
+//     "animIdx": 0,
+//     "count": 21,
+//     "ordre": [],
+//     "animFrames": [],
+//   };
+// };
 
 export const AlgoParameters = () => {
   return {

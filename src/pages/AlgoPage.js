@@ -15,6 +15,8 @@ export default function AlgoPage() {
   const [isMelangerEnabled, setIsMelangerEnabled] = useState(true);
   const [isPauseEnabled, setIsPauseEnabled] = useState();
 
+  const melText = 'Mélanger';
+
   const [params, setParams] = useContext(ParamsContext);
 
   const chartRef = useRef();
@@ -27,17 +29,22 @@ export default function AlgoPage() {
   const [animFramesState, setAnimFramesState] = useState(pdata.animFrames);
 
   function melanger(pt) {
+    setIsPlayingState(false);
     setAnimIdxState(0);
     setAnimFramesState([]);
     let tempFrames = [];
 
-    tempFrames = shuffle(chartRef.current.state.tableau);
-    setAnimFramesState(tempFrames);
-    chartRef.current.setState({ animFrames: tempFrames });
-
+    //    tempFrames = shuffle(chartRef.current.state.tableau);
+    if (currentAlgo === AUCUN) {
+      tempFrames = shuffle(pt);
+      setAnimFramesState(tempFrames);
+      // chartRef.current.setState({ animFrames: tempFrames });
+      chartRef.current.setState({ tableau: tempFrames });
+    } else {
+      setCurrentAlgo(AUCUN);
+    }
     setIsInsertionEnabled(true);
     setIsBullesEnabled(true);
-    setIsPlayingState(false);
   }
 
   function triABulles(pt) {
@@ -46,7 +53,8 @@ export default function AlgoPage() {
     setAnimFramesState([]);
     let tempFrames = [];
 
-    tempFrames = triageABulles(chartRef.current.state.tableau);
+    // tempFrames = triageABulles(chartRef.current.state.tableau);
+    tempFrames = triageABulles(pt);
     setAnimFramesState(tempFrames);
     chartRef.current.setState({ animFrames: tempFrames });
     setIsInsertionEnabled(false);
@@ -60,7 +68,7 @@ export default function AlgoPage() {
     setAnimIdxState(0);
     setAnimFramesState([]);
     let tempFrames = [];
-    tempFrames = triageInsertion(chartRef.current.state.tableau);
+    tempFrames = triageInsertion(pt);
     setAnimFramesState(tempFrames);
     chartRef.current.setState({ animFrames: tempFrames });
     setIsInsertionEnabled(false);
@@ -107,14 +115,12 @@ export default function AlgoPage() {
         <div className={classes.boutonsRow}>
           <button
             className={classes.boutonsPlusMoins}
-            disabled={!isMelangerEnabled}
+            disabled={!isMelangerEnabled || countState < 14}
             onClick={() => {
-              if (countState > 10) {
-                setIsBullesEnabled(true);
-                setIsInsertionEnabled(true);
-                setCountState(countState - 10);
-                setAnimIdxState(0);
-              }
+              setIsBullesEnabled(true);
+              setIsInsertionEnabled(true);
+              setCountState(countState - 10);
+              setAnimIdxState(0);
             }}
           >
             -10
@@ -122,77 +128,60 @@ export default function AlgoPage() {
 
           <button
             className={classes.boutonsPlusMoins}
-            disabled={!isMelangerEnabled}
+            disabled={!isMelangerEnabled || countState < 4}
             onClick={() => {
-              if (countState > 1) {
-                setIsBullesEnabled(true);
-                setIsInsertionEnabled(true);
-                setCountState(countState - 1);
-                setAnimIdxState(0);
-              }
+              setIsBullesEnabled(true);
+              setIsInsertionEnabled(true);
+              setCountState(countState - 1);
+              setAnimIdxState(0);
             }}
           >
             -1
           </button>
           <button
             className={classes.boutonsPlusMoins}
-            disabled={!isMelangerEnabled}
+            disabled={!isMelangerEnabled || countState > 199}
             onClick={() => {
-              if (countState < 400) {
-                setIsBullesEnabled(true);
-                setIsInsertionEnabled(true);
-                setCountState(countState + 1);
-                setAnimIdxState(0);
-              }
+              setIsBullesEnabled(true);
+              setIsInsertionEnabled(true);
+              setCountState(countState + 1);
+              setAnimIdxState(0);
             }}
           >
             +1
           </button>
           <button
             className={classes.boutonsPlusMoins}
-            disabled={!isMelangerEnabled}
+            disabled={!isMelangerEnabled || countState > 191}
             onClick={() => {
-              if (countState < 391) {
-                setIsBullesEnabled(true);
-                setIsInsertionEnabled(true);
-                setCountState(countState + 10);
-                setAnimIdxState(0);
-              }
+              setIsBullesEnabled(true);
+              setIsInsertionEnabled(true);
+              setCountState(countState + 10);
+              setAnimIdxState(0);
             }}
           >
             +10
           </button>
         </div>
         <div className={classes.boutonsRow}>
-          {/* <button
-            disabled={isButtonEnabled}
-            onClick={() => {
-              setIsButtonEnabled(!isButtonEnabled);
-            }}
-          >
-            {isButtonEnabled ? 'Togglé' : 'Clickez pour Toggler'}
-          </button> */}
-
           <button
             className={classes.boutonsTri}
             style={{ fontWeight: currentAlgo === ABULLES ? 'bold' : 'normal' }}
             disabled={!isBullesEnabled}
             onClick={() => {
-              //              setIsBullesEnabled(!isBullesEnabled);
               triABulles(chartRef.current.state.tableau);
             }}
           >
             Tri à bulles
           </button>
+
           <button
             className={classes.boutonsTri}
-            disabled={!isMelangerEnabled}
             onClick={() => {
-              //            setIsMelangerEnabled(!isMelangerEnabled);
               melanger(chartRef.current.state.tableau);
             }}
           >
-            Mélanger
+            {currentAlgo === AUCUN ? 'Mélanger' : 'Arrêter'}
           </button>
           <button
             className={classes.boutonsTri}
@@ -206,16 +195,6 @@ export default function AlgoPage() {
           >
             Tri insertion
           </button>
-          {/* <button
-            className={classes.boutonsTri}
-            disabled={isPauseEnabled}
-            onClick={() => {
-              setIsPauseEnabled(!isPauseEnabled);
-              // triInsertion(chartRef.current.state.tableau);
-            }}
-          >
-            {isPauseEnabled ? 'Pause' : 'Continuer'}
-          </button> */}
         </div>
         {
           <Chart
