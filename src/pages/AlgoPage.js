@@ -12,8 +12,6 @@ export default function AlgoPage() {
   const [isBullesEnabled, setIsBullesEnabled] = useState(true);
   const [isInsertionEnabled, setIsInsertionEnabled] = useState(true);
   const [isMelangerEnabled, setIsMelangerEnabled] = useState(true);
-  // const [bullesPointerI, setBullesPointerI] = useState(0); // I monte ++
-  // const [bullesPointerJ, setBullesPointerJ] = useState(0); // J descend --
   const [params, setParams] = useContext(ParamsContext);
 
   const chartRef = useRef();
@@ -94,31 +92,8 @@ export default function AlgoPage() {
       clearTimeout(timeoutRef.current);
       timeoutRef.current = setTimeout(() => {
         setAnimIdxState(animIdxState + 1);
-        // if (currentAlgoState === ABULLES) {
-        //   console.log('A B U L L E S !');
-        //   if (bullesPointerJ >= bullesPointerI + 1) {
-        //     console.log('      down !');
-        //     setBullesPointerJ(bullesPointerJ - 1);
-        //     console.log('I', bullesPointerI);
-        //     console.log('J', bullesPointerJ);
-        //   } else {
-        //     console.log('      up !');
-        //     setBullesPointerI(bullesPointerI + 1);
-        //     setBullesPointerJ(chartRef.current.state.tableau.length);
-
-        //     console.log('I', bullesPointerI);
-        //     console.log('J', bullesPointerJ);
-        //   }
-        // } else {
-        //   setBullesPointerJ(animIdxState + 1);
-        //   console.log('setBullesPointerJ(animIdxState)');
-        // }
       }, 50);
     } else {
-      // setBullesPointerI(1);
-      // setBullesPointerJ(chartRef.current.state.tableau.length);
-      // console.log('I', bullesPointerI);
-      // console.log('J', bullesPointerJ);
       setCurrentAlgoState(AUCUN);
       setIsPlayingState(false);
       setIsMelangerEnabled(true);
