@@ -13,10 +13,11 @@ export default class Chart extends Component {
       count: this.props.count,
       ordre: [],
       animIdx: this.props.animIdx,
+      pointer: this.props.pointer,
       isPlaying: this.props.isPlaying,
       animFrames: this.props.animFrames,
       tableau: [],
-      msg: 'Message',
+      msg: '',
     };
   }
 
@@ -47,17 +48,12 @@ export default class Chart extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.count !== this.state.count) {
-      //  this.setState({ msg: 'reshuffle' });
       this.setState({ tableau: shuffle(createArray(this.props.count)) });
     }
     if (prevState.animIdx !== this.state.animIdx && this.state.animIdx !== 0) {
       this.setState({ ordre: this.state.animFrames[this.state.animIdx] });
       this.setState({ tableau: this.state.animFrames[this.state.animIdx] });
     }
-    // if (prevState.tableau.length !== this.state.tableau.length) {
-    //   // this.setState({ msg: ' I N U T I L E ' });
-    //   // this.setState({ ordre: this.state.tableau });
-    // }
   }
 
   render() {
@@ -65,7 +61,14 @@ export default class Chart extends Component {
       <>
         <div className={classes.chart}>
           {Object.values(this.state.tableau).map((barre, i) => (
-            <Bar barre={barre} cpc={this.state.tableau.length} key={i}>
+            <Bar
+              barre={barre}
+              cpc={this.state.tableau.length}
+              animIdx={this.state.animIdx}
+              pointer={this.state.pointer}
+              key={i}
+              i={i}
+            >
               {' '}
               {barre}
             </Bar>

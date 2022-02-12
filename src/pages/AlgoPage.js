@@ -7,16 +7,13 @@ import { ParamsContext } from '../logic/ParamsContext';
 import classes from './AlgoPage.module.css';
 
 export default function AlgoPage() {
-  // const [isButtonEnabled, setIsButtonEnabled] = useToggle();
-  const [AUCUN, ABULLES, INSERTION] = [0, 1, 2];
-  const [currentAlgo, setCurrentAlgo] = useState(AUCUN);
+  const [AUCUN, ABULLES, INSERTION, TRIE] = [0, 1, 2, 3];
+  const [currentAlgoState, setCurrentAlgoState] = useState(AUCUN);
   const [isBullesEnabled, setIsBullesEnabled] = useState(true);
   const [isInsertionEnabled, setIsInsertionEnabled] = useState(true);
   const [isMelangerEnabled, setIsMelangerEnabled] = useState(true);
-  const [isPauseEnabled, setIsPauseEnabled] = useState();
-
-  const melText = 'Mélanger';
-
+  // const [bullesPointerI, setBullesPointerI] = useState(0); // I monte ++
+  // const [bullesPointerJ, setBullesPointerJ] = useState(0); // J descend --
   const [params, setParams] = useContext(ParamsContext);
 
   const chartRef = useRef();
@@ -33,27 +30,22 @@ export default function AlgoPage() {
     setAnimIdxState(0);
     setAnimFramesState([]);
     let tempFrames = [];
-
-    //    tempFrames = shuffle(chartRef.current.state.tableau);
-    if (currentAlgo === AUCUN) {
+    if (currentAlgoState === AUCUN || currentAlgoState === TRIE) {
       tempFrames = shuffle(pt);
       setAnimFramesState(tempFrames);
-      // chartRef.current.setState({ animFrames: tempFrames });
       chartRef.current.setState({ tableau: tempFrames });
     } else {
-      setCurrentAlgo(AUCUN);
+      setCurrentAlgoState(AUCUN);
     }
     setIsInsertionEnabled(true);
     setIsBullesEnabled(true);
   }
 
   function triABulles(pt) {
-    setCurrentAlgo(ABULLES);
+    setCurrentAlgoState(ABULLES);
     setAnimIdxState(0);
     setAnimFramesState([]);
     let tempFrames = [];
-
-    // tempFrames = triageABulles(chartRef.current.state.tableau);
     tempFrames = triageABulles(pt);
     setAnimFramesState(tempFrames);
     chartRef.current.setState({ animFrames: tempFrames });
@@ -64,13 +56,14 @@ export default function AlgoPage() {
   }
 
   function triInsertion(pt) {
-    setCurrentAlgo(INSERTION);
+    setCurrentAlgoState(INSERTION);
     setAnimIdxState(0);
     setAnimFramesState([]);
     let tempFrames = [];
     tempFrames = triageInsertion(pt);
     setAnimFramesState(tempFrames);
     chartRef.current.setState({ animFrames: tempFrames });
+
     setIsInsertionEnabled(false);
     setIsBullesEnabled(false);
     setIsMelangerEnabled(false);
@@ -78,15 +71,18 @@ export default function AlgoPage() {
   }
 
   function getCurrentAlgoTitle() {
-    switch (currentAlgo) {
+    switch (currentAlgoState) {
       case ABULLES: {
-        return ' : Tri à bulles';
+        return 'Tri à bulles : ' + animIdxState + '/' + animFramesState.length;
       }
       case INSERTION: {
-        return ' : Tri insertion';
+        return 'Tri insertion : ' + animIdxState + '/' + animFramesState.length;
+      }
+      case TRIE: {
+        return 'Trié';
       }
       default: {
-        break;
+        return 'Non trié';
       }
     }
   }
@@ -98,19 +94,44 @@ export default function AlgoPage() {
       clearTimeout(timeoutRef.current);
       timeoutRef.current = setTimeout(() => {
         setAnimIdxState(animIdxState + 1);
+        // if (currentAlgoState === ABULLES) {
+        //   console.log('A B U L L E S !');
+        //   if (bullesPointerJ >= bullesPointerI + 1) {
+        //     console.log('      down !');
+        //     setBullesPointerJ(bullesPointerJ - 1);
+        //     console.log('I', bullesPointerI);
+        //     console.log('J', bullesPointerJ);
+        //   } else {
+        //     console.log('      up !');
+        //     setBullesPointerI(bullesPointerI + 1);
+        //     setBullesPointerJ(chartRef.current.state.tableau.length);
+
+        //     console.log('I', bullesPointerI);
+        //     console.log('J', bullesPointerJ);
+        //   }
+        // } else {
+        //   setBullesPointerJ(animIdxState + 1);
+        //   console.log('setBullesPointerJ(animIdxState)');
+        // }
       }, 50);
     } else {
-      setCurrentAlgo(AUCUN);
+      // setBullesPointerI(1);
+      // setBullesPointerJ(chartRef.current.state.tableau.length);
+      // console.log('I', bullesPointerI);
+      // console.log('J', bullesPointerJ);
+      setCurrentAlgoState(AUCUN);
       setIsPlayingState(false);
       setIsMelangerEnabled(true);
+    }
+    if (animIdxState === animFramesState.length - 1 && !isPlayingState) {
+      setCurrentAlgoState(TRIE);
     }
   }, [animIdxState, isPlayingState, animFramesState.length]);
 
   return (
     <section>
-      <h1>
-        Tableau de {countState} éléments {getCurrentAlgoTitle()}
-      </h1>
+      <h1>Tableau de {countState} éléments</h1>
+      <h2>{getCurrentAlgoTitle()}</h2>
       <Card>
         <div className={classes.boutonsRow}>
           <button
@@ -166,7 +187,9 @@ export default function AlgoPage() {
         <div className={classes.boutonsRow}>
           <button
             className={classes.boutonsTri}
-            style={{ fontWeight: currentAlgo === ABULLES ? 'bold' : 'normal' }}
+            style={{
+              fontWeight: currentAlgoState === ABULLES ? 'bold' : 'normal',
+            }}
             disabled={!isBullesEnabled}
             onClick={() => {
               triABulles(chartRef.current.state.tableau);
@@ -181,12 +204,14 @@ export default function AlgoPage() {
               melanger(chartRef.current.state.tableau);
             }}
           >
-            {currentAlgo === AUCUN ? 'Mélanger' : 'Arrêter'}
+            {currentAlgoState === AUCUN || currentAlgoState === TRIE
+              ? 'Mélanger'
+              : 'Arrêter'}
           </button>
           <button
             className={classes.boutonsTri}
             style={{
-              fontWeight: currentAlgo === INSERTION ? 'bold' : 'normal',
+              fontWeight: currentAlgoState === INSERTION ? 'bold' : 'normal',
             }}
             disabled={!isInsertionEnabled}
             onClick={() => {
@@ -201,6 +226,7 @@ export default function AlgoPage() {
             ref={chartRef}
             count={countState}
             animIdx={animIdxState}
+            // pointer={bullesPointerJ}
             isPlaying={isPlayingState}
             animFrames={animFramesState}
           />
@@ -208,4 +234,4 @@ export default function AlgoPage() {
       </Card>
     </section>
   );
-} // 3iqkj1en (code fred)
+}

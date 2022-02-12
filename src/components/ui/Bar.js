@@ -18,7 +18,6 @@ function Bar(props) {
 
   return (
     <div className={classes.column}>
-      {/* {size.width} */}
       <div className={classes.barre} style={{ flexBasis: h }}>
         {n}
       </div>
