@@ -207,6 +207,7 @@ export default function AlgoPage() {
           />
         }
       </Card>
+      <h3>2022 François Gravel</h3>
     </section>
   );
 }
