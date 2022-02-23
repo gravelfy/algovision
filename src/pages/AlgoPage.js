@@ -20,17 +20,12 @@ export default function AlgoPage() {
   const [isPlayingState, setIsPlayingState] = useState(pdata.isPlaying);
   const [countState, setCountState] = useState(pdata.count);
   const [animIdxState, setAnimIdxState] = useState(pdata.animIdx);
-  const [animFramesState, setAnimFramesState] = useState(pdata.animFrames);
 
   function melanger(pt) {
     setIsPlayingState(false);
     setAnimIdxState(0);
-    setAnimFramesState([]);
-    let tempFrames = [];
     if (currentAlgoState === AUCUN || currentAlgoState === TRIE) {
-      tempFrames = shuffle(pt);
-      setAnimFramesState(tempFrames);
-      chartRef.current.setState({ tableau: tempFrames });
+      chartRef.current.setState({ tableau: shuffle(pt) });
     } else {
       setCurrentAlgoState(AUCUN);
     }
@@ -40,11 +35,7 @@ export default function AlgoPage() {
   function triABulles(pt) {
     setCurrentAlgoState(ABULLES);
     setAnimIdxState(0);
-    setAnimFramesState([]);
-    let tempFrames = [];
-    tempFrames = triageABulles(pt);
-    setAnimFramesState(tempFrames);
-    chartRef.current.setState({ animFrames: tempFrames });
+    chartRef.current.setState({ animFrames: triageABulles(pt) });
     setIsTriEnabled(false);
     setIsMelangerEnabled(false);
     setIsPlayingState(true);
@@ -53,11 +44,7 @@ export default function AlgoPage() {
   function triInsertion(pt) {
     setCurrentAlgoState(INSERTION);
     setAnimIdxState(0);
-    setAnimFramesState([]);
-    let tempFrames = [];
-    tempFrames = triageInsertion(pt);
-    setAnimFramesState(tempFrames);
-    chartRef.current.setState({ animFrames: tempFrames });
+    chartRef.current.setState({ animFrames: triageInsertion(pt) });
     setIsTriEnabled(false);
     setIsMelangerEnabled(false);
     setIsPlayingState(true);
@@ -66,10 +53,10 @@ export default function AlgoPage() {
   function getCurrentAlgoTitle() {
     switch (currentAlgoState) {
       case ABULLES: {
-        return 'Tri à bulles : ' + animIdxState + '/' + animFramesState.length;
+        return `Tri à bulles : ${animIdxState}/${chartRef.current.state.animFrames.length.toString()}`;
       }
       case INSERTION: {
-        return 'Tri insertion : ' + animIdxState + '/' + animFramesState.length;
+        return `Tri insertion : ${animIdxState}/${chartRef.current.state.animFrames.length.toString()}`;
       }
       case TRIE: {
         return 'Trié';
@@ -89,7 +76,10 @@ export default function AlgoPage() {
   const timeoutRef = useRef(setTimeout);
 
   useEffect(() => {
-    if (animIdxState < animFramesState.length - 1 && isPlayingState) {
+    if (
+      animIdxState < chartRef.current.state.animFrames.length - 1 &&
+      isPlayingState
+    ) {
       clearTimeout(timeoutRef.current);
       timeoutRef.current = setTimeout(() => {
         setAnimIdxState(animIdxState + 1);
@@ -99,10 +89,13 @@ export default function AlgoPage() {
       setIsPlayingState(false);
       setIsMelangerEnabled(true);
     }
-    if (animIdxState === animFramesState.length - 1 && !isPlayingState) {
+    if (
+      animIdxState === chartRef.current.state.animFrames.length - 1 &&
+      !isPlayingState
+    ) {
       setCurrentAlgoState(TRIE);
     }
-  }, [animIdxState, isPlayingState, animFramesState.length]);
+  }, [animIdxState, isPlayingState, AUCUN, TRIE]);
 
   return (
     <section>
@@ -191,7 +184,7 @@ export default function AlgoPage() {
             count={countState}
             animIdx={animIdxState}
             isPlaying={isPlayingState}
-            animFrames={animFramesState}
+            animFrames={[]}
           />
         }
       </Card>

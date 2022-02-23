@@ -3,17 +3,12 @@ import { createArray, shuffle } from '../../algos/shuffle';
 import Bar from './Bar';
 import classes from './Chart.module.css';
 
-// ! from algotri
-// TODO refactor vars
-
 export default class Chart extends Component {
   constructor(props) {
     super(props);
     this.state = {
       count: this.props.count,
-      ordre: [],
       animIdx: this.props.animIdx,
-      pointer: this.props.pointer,
       isPlaying: this.props.isPlaying,
       animFrames: this.props.animFrames,
       tableau: [],
@@ -51,7 +46,6 @@ export default class Chart extends Component {
       this.setState({ tableau: shuffle(createArray(this.props.count)) });
     }
     if (prevState.animIdx !== this.state.animIdx && this.state.animIdx !== 0) {
-      this.setState({ ordre: this.state.animFrames[this.state.animIdx] });
       this.setState({ tableau: this.state.animFrames[this.state.animIdx] });
     }
   }
