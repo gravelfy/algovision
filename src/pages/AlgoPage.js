@@ -9,8 +9,7 @@ import classes from './AlgoPage.module.css';
 export default function AlgoPage() {
   const [AUCUN, ABULLES, INSERTION, TRIE] = [0, 1, 2, 3];
   const [currentAlgoState, setCurrentAlgoState] = useState(AUCUN);
-  const [isBullesEnabled, setIsBullesEnabled] = useState(true);
-  const [isInsertionEnabled, setIsInsertionEnabled] = useState(true);
+  const [isTriEnabled, setIsTriEnabled] = useState(true);
   const [isMelangerEnabled, setIsMelangerEnabled] = useState(true);
   const [params, setParams] = useContext(ParamsContext);
 
@@ -35,8 +34,7 @@ export default function AlgoPage() {
     } else {
       setCurrentAlgoState(AUCUN);
     }
-    setIsInsertionEnabled(true);
-    setIsBullesEnabled(true);
+    setIsTriEnabled(true);
   }
 
   function triABulles(pt) {
@@ -47,8 +45,7 @@ export default function AlgoPage() {
     tempFrames = triageABulles(pt);
     setAnimFramesState(tempFrames);
     chartRef.current.setState({ animFrames: tempFrames });
-    setIsInsertionEnabled(false);
-    setIsBullesEnabled(false);
+    setIsTriEnabled(false);
     setIsMelangerEnabled(false);
     setIsPlayingState(true);
   }
@@ -61,9 +58,7 @@ export default function AlgoPage() {
     tempFrames = triageInsertion(pt);
     setAnimFramesState(tempFrames);
     chartRef.current.setState({ animFrames: tempFrames });
-
-    setIsInsertionEnabled(false);
-    setIsBullesEnabled(false);
+    setIsTriEnabled(false);
     setIsMelangerEnabled(false);
     setIsPlayingState(true);
   }
@@ -85,6 +80,12 @@ export default function AlgoPage() {
     }
   }
 
+  function tableauResize(n) {
+    setIsTriEnabled(true);
+    setCountState(countState + n);
+    setAnimIdxState(0);
+  }
+
   const timeoutRef = useRef(setTimeout);
 
   useEffect(() => {
@@ -92,7 +93,7 @@ export default function AlgoPage() {
       clearTimeout(timeoutRef.current);
       timeoutRef.current = setTimeout(() => {
         setAnimIdxState(animIdxState + 1);
-      }, 50);
+      }, 30);
     } else {
       setCurrentAlgoState(AUCUN);
       setIsPlayingState(false);
@@ -113,10 +114,7 @@ export default function AlgoPage() {
             className={classes.boutonsPlusMoins}
             disabled={!isMelangerEnabled || countState < 14}
             onClick={() => {
-              setIsBullesEnabled(true);
-              setIsInsertionEnabled(true);
-              setCountState(countState - 10);
-              setAnimIdxState(0);
+              tableauResize(-10);
             }}
           >
             -10
@@ -126,10 +124,7 @@ export default function AlgoPage() {
             className={classes.boutonsPlusMoins}
             disabled={!isMelangerEnabled || countState < 4}
             onClick={() => {
-              setIsBullesEnabled(true);
-              setIsInsertionEnabled(true);
-              setCountState(countState - 1);
-              setAnimIdxState(0);
+              tableauResize(-1);
             }}
           >
             -1
@@ -138,10 +133,7 @@ export default function AlgoPage() {
             className={classes.boutonsPlusMoins}
             disabled={!isMelangerEnabled || countState > 199}
             onClick={() => {
-              setIsBullesEnabled(true);
-              setIsInsertionEnabled(true);
-              setCountState(countState + 1);
-              setAnimIdxState(0);
+              tableauResize(1);
             }}
           >
             +1
@@ -150,10 +142,7 @@ export default function AlgoPage() {
             className={classes.boutonsPlusMoins}
             disabled={!isMelangerEnabled || countState > 191}
             onClick={() => {
-              setIsBullesEnabled(true);
-              setIsInsertionEnabled(true);
-              setCountState(countState + 10);
-              setAnimIdxState(0);
+              tableauResize(10);
             }}
           >
             +10
@@ -165,7 +154,7 @@ export default function AlgoPage() {
             style={{
               fontWeight: currentAlgoState === ABULLES ? 'bold' : 'normal',
             }}
-            disabled={!isBullesEnabled}
+            disabled={!isTriEnabled}
             onClick={() => {
               triABulles(chartRef.current.state.tableau);
             }}
@@ -188,7 +177,7 @@ export default function AlgoPage() {
             style={{
               fontWeight: currentAlgoState === INSERTION ? 'bold' : 'normal',
             }}
-            disabled={!isInsertionEnabled}
+            disabled={!isTriEnabled}
             onClick={() => {
               triInsertion(chartRef.current.state.tableau);
             }}
@@ -201,7 +190,6 @@ export default function AlgoPage() {
             ref={chartRef}
             count={countState}
             animIdx={animIdxState}
-            // pointer={bullesPointerJ}
             isPlaying={isPlayingState}
             animFrames={animFramesState}
           />
