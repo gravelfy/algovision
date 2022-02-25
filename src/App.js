@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import Layout from './components/layout/Layout';
+import './i18n/i18n.js';
 import { AlgoParameters } from './logic/AlgoParams';
 import { ParamsContext } from './logic/ParamsContext';
 import AlgoPage from './pages/AlgoPage';

@@ -1,17 +1,27 @@
 import { useContext, useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { shuffle } from '../algos/shuffle';
 import { triageABulles, triageInsertion } from '../algos/tri';
 import Card from '../components/ui/Card';
 import Chart from '../components/ui/Chart';
+// import translationEN from '../i18n/en.json';
+// import translationFR from '../i18n/fr.json';
 import { ParamsContext } from '../logic/ParamsContext';
 import classes from './AlgoPage.module.css';
 
+// console.table(translationEN);
+// console.table(translationFR);
+
 export default function AlgoPage() {
+  const { t, i18n } = useTranslation();
+  document.title = t('Sorting Algorithms');
+
   const [AUCUN, ABULLES, INSERTION, TRIE] = [0, 1, 2, 3];
   const [currentAlgoState, setCurrentAlgoState] = useState(AUCUN);
   const [isTriEnabled, setIsTriEnabled] = useState(true);
   const [isMelangerEnabled, setIsMelangerEnabled] = useState(true);
-  const [params, setParams] = useContext(ParamsContext);
+  const [params] = useContext(ParamsContext);
+  //  const [params, setParams] = useContext(ParamsContext);
 
   const chartRef = useRef();
 
@@ -53,16 +63,20 @@ export default function AlgoPage() {
   function getCurrentAlgoTitle() {
     switch (currentAlgoState) {
       case ABULLES: {
-        return `Tri à bulles : ${animIdxState}/${chartRef.current.state.animFrames.length.toString()}`;
+        return `${t(
+          'Bubble sort'
+        )} : ${animIdxState}/${chartRef.current.state.animFrames.length.toString()}`;
       }
       case INSERTION: {
-        return `Tri insertion : ${animIdxState}/${chartRef.current.state.animFrames.length.toString()}`;
+        return `${t(
+          'Insertion sort'
+        )}  : ${animIdxState}/${chartRef.current.state.animFrames.length.toString()}`;
       }
       case TRIE: {
-        return 'Trié';
+        return `${t('Sorted')}`;
       }
       default: {
-        return 'Non trié';
+        return `${t('Unsorted')} `;
       }
     }
   }
@@ -99,9 +113,46 @@ export default function AlgoPage() {
 
   return (
     <section>
-      <h1>Tableau de {countState} éléments</h1>
+      <h1>{t('n_elements_array', { count: countState })}</h1>
       <h2>{getCurrentAlgoTitle()}</h2>
       <Card>
+        <div className={classes.boutonsRow}>
+          <button
+            className={classes.boutonsTri}
+            style={{
+              fontWeight: currentAlgoState === ABULLES ? 'bolder' : 'bold',
+            }}
+            disabled={!isTriEnabled}
+            onClick={() => {
+              triABulles(chartRef.current.state.tableau);
+            }}
+          >
+            {t('Bubble sort')}
+          </button>
+
+          <button
+            className={classes.boutonsTri}
+            onClick={() => {
+              melanger(chartRef.current.state.tableau);
+            }}
+          >
+            {currentAlgoState === AUCUN || currentAlgoState === TRIE
+              ? t('Shuffle')
+              : t('Stop')}
+          </button>
+          <button
+            className={classes.boutonsTri}
+            style={{
+              fontWeight: currentAlgoState === INSERTION ? 'bolded' : 'bold',
+            }}
+            disabled={!isTriEnabled}
+            onClick={() => {
+              triInsertion(chartRef.current.state.tableau);
+            }}
+          >
+            {t('Insertion sort')}
+          </button>
+        </div>
         <div className={classes.boutonsRow}>
           <button
             className={classes.boutonsPlusMoins}
@@ -141,43 +192,7 @@ export default function AlgoPage() {
             +10
           </button>
         </div>
-        <div className={classes.boutonsRow}>
-          <button
-            className={classes.boutonsTri}
-            style={{
-              fontWeight: currentAlgoState === ABULLES ? 'bold' : 'normal',
-            }}
-            disabled={!isTriEnabled}
-            onClick={() => {
-              triABulles(chartRef.current.state.tableau);
-            }}
-          >
-            Tri à bulles
-          </button>
 
-          <button
-            className={classes.boutonsTri}
-            onClick={() => {
-              melanger(chartRef.current.state.tableau);
-            }}
-          >
-            {currentAlgoState === AUCUN || currentAlgoState === TRIE
-              ? 'Mélanger'
-              : 'Arrêter'}
-          </button>
-          <button
-            className={classes.boutonsTri}
-            style={{
-              fontWeight: currentAlgoState === INSERTION ? 'bold' : 'normal',
-            }}
-            disabled={!isTriEnabled}
-            onClick={() => {
-              triInsertion(chartRef.current.state.tableau);
-            }}
-          >
-            Tri insertion
-          </button>
-        </div>
         {
           <Chart
             ref={chartRef}
@@ -188,6 +203,7 @@ export default function AlgoPage() {
           />
         }
       </Card>
+
       <h3>2022 François Gravel</h3>
     </section>
   );

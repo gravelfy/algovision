@@ -14,6 +14,15 @@ h3 {
   font-size: 0.9em;
 }
 
+select {
+  width: 100%;
+  padding: 3px 3px;
+  border: 1px dashed dimgrey;
+  border-radius: 4px;
+  color: #000277;
+  background-color: darkgrey;
+}
+
 .boutonsPlusMoins {
   background-color: #000277;
   color: white;
@@ -29,6 +38,10 @@ h3 {
 button:disabled {
   background-color: darkgray;
   color: dimgray;
+}
+
+button {
+  font-weight: bold;
 }
 
 @media screen and (min-width: 601px) {
