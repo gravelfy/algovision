@@ -1,11 +1,10 @@
 {
-    "Insertion sort" : "Insertion sort",
     "Bubble Sort" : "Bubble Sort",
-    "Sorting Algorithms" : "Sorting Algorithms",
+    "Insertion sort" : "Insertion sort",
+    "n_elements_array": "{{count}} elements array",
+    "Shuffle" : "Shuffle",
     "Sorted" : "Sorted",
-"Unsorted" : "Unsorted",
-"n_elements_array": "{{count}} elements array",
-"Shuffle" : "Shuffle",
-"Stop" : "Stop"
-    
+    "Sorting Algorithms" : "Sorting Algorithms",
+    "Stop" : "Stop",
+    "Unsorted" : "Unsorted"
     }

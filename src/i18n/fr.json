@@ -1,11 +1,10 @@
 {
-    "Sorting Algorithms" : "Algorithmes de tri",
+    "Bubble sort" : "Tri à bulles",
     "Insertion sort" : "Tri insertion",
-"Bubble sort" : "Tri à bulles",
-"Sorted" : "Trié",
-"Unsorted" : "Non-trié",
-"n_elements_array": "Tableau de {{count}} éléments",
-"Shuffle" : "Mélanger",
-"Stop" : "Arrêter"
-
+    "n_elements_array": "Tableau de {{count}} éléments",
+    "Shuffle" : "Mélanger",
+    "Sorted" : "Trié",
+    "Sorting Algorithms" : "Algorithmes de tri",
+    "Stop" : "Arrêter",
+    "Unsorted" : "Non-trié"
 }

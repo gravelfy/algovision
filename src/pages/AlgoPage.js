@@ -4,13 +4,8 @@ import { shuffle } from '../algos/shuffle';
 import { triageABulles, triageInsertion } from '../algos/tri';
 import Card from '../components/ui/Card';
 import Chart from '../components/ui/Chart';
-// import translationEN from '../i18n/en.json';
-// import translationFR from '../i18n/fr.json';
 import { ParamsContext } from '../logic/ParamsContext';
 import classes from './AlgoPage.module.css';
-
-// console.table(translationEN);
-// console.table(translationFR);
 
 export default function AlgoPage() {
   const { t, i18n } = useTranslation();

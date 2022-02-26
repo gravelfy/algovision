@@ -1,0 +1,73 @@
+html {
+  height: -webkit-fill-available;
+  width: -webkit-fill-available;
+}
+
+body {
+  --color-background: white;
+  --color-foreground: black;
+  --nav-color-background: #191a4b;
+  --nav-color-foreground: white;
+
+  @media (prefers-color-scheme: dark) {
+    --color-background: black;
+    --color-foreground: green;
+    --nav-color-background: #0e0f2b;
+    --nav-color-foreground: green;
+  }
+
+  max-width: 100vw;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  color: white;
+}
+.NavBar {
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--nav-color-background);
+  color: var(--nav-color-foreground);
+  padding: 0 5%;
+  font-weight: bold;
+}
+
+// .dark-mode > .barre {
+//   border-right: 1px solid orange;
+//   background-color: #888888;
+//   color: rgb(0, 0, 0);
+// }
+
+// @media (prefers-color-scheme: dark) {
+//   background-color: #000000;
+//   color: #dfdfdf;
+// }
+
+// body.dark-mode {
+//   background-color: #000000;
+//   color: #dfdfdf;
+
+//   .NavBar {
+//     background-color: #191a4b;
+//     color: rgb(182, 182, 182);
+//   }
+
+//   .dark-mode-toggle > button {
+//     color: #999;
+//     &:last-child {
+//       color: #ffffff;
+//     }
+//   }
+// }
+
+/* code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+} */

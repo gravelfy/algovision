@@ -5,6 +5,8 @@
   justify-content: space-between;
   background-color: #000277;
   padding: 0 5%;
+  /* color: white;
+   font-weight: bold; */
 }
 
 @media screen and (min-width: 601px) {
@@ -22,8 +24,6 @@
 .logo {
   /* font-size: 2rem; */
   /* font-size: 4vw; */
-  color: white;
-  font-weight: bold;
 }
 
 /* //////// ! NOT BELOW /////// */
@@ -51,6 +51,7 @@
 .header a.active {
   color: white;
 }
+
 /*
 .badge {
   background-color: #cc2062;
