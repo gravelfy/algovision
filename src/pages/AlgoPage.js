@@ -120,7 +120,7 @@ export default function AlgoPage() {
               triABulles(chartRef.current.state.tableau);
             }}
           >
-            {t('Bubble sort')}
+            ▶ {t('Bubble sort')}
           </button>
 
           <button
@@ -130,8 +130,8 @@ export default function AlgoPage() {
             }}
           >
             {currentAlgoState === AUCUN || currentAlgoState === TRIE
-              ? t('Shuffle')
-              : t('Stop')}
+              ? '🔀' + t('Shuffle')
+              : '⏹' + t('Stop')}
           </button>
           <button
             className={classes.boutonsTri}
@@ -143,7 +143,7 @@ export default function AlgoPage() {
               triInsertion(chartRef.current.state.tableau);
             }}
           >
-            {t('Insertion sort')}
+            ▶ {t('Insertion sort')}
           </button>
         </div>
 
