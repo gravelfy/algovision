@@ -108,8 +108,6 @@ export default function AlgoPage() {
 
   return (
     <section>
-      <h1>{t('n_elements_array', { count: countState })}</h1>
-      <h2>{getCurrentAlgoTitle()}</h2>
       <Card>
         <div className={classes.boutonsRow}>
           <button
@@ -148,6 +146,7 @@ export default function AlgoPage() {
             {t('Insertion sort')}
           </button>
         </div>
+
         <div className={classes.boutonsRow}>
           <button
             className={classes.boutonsPlusMoins}
@@ -186,6 +185,10 @@ export default function AlgoPage() {
           >
             +10
           </button>
+        </div>
+        <div className={classes.textinfo}>
+          {t('n_elements_array', { count: countState })} :{' '}
+          {getCurrentAlgoTitle()}
         </div>
 
         {

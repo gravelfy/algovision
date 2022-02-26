@@ -24,14 +24,14 @@ select {
 }
 
 .boutonsPlusMoins {
-  background-color: #191a4b;
-  /* color: white; */
+  background-color: #000277;
+  color: white;
   width: 25%;
 }
 
 .boutonsTri {
-  background-color: #191a4b;
-  /* color: white; */
+  background-color: #000277;
+  color: white;
   width: 33.33%;
 }
 
@@ -64,4 +64,14 @@ button {
 .boutonsRow {
   width: 100%;
   vertical-align: text-bottom;
+  border: 3px;
+  border-color: dimgrey;
+}
+
+.textinfo {
+  width: 100%;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: left;
+  padding: 1em;
 }

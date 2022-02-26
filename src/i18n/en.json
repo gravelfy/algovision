@@ -1,7 +1,7 @@
 {
     "Bubble Sort" : "Bubble Sort",
     "Insertion sort" : "Insertion sort",
-    "n_elements_array": "{{count}} elements array",
+    "n_elements_array": "{{count}} element array",
     "Shuffle" : "Shuffle",
     "Sorted" : "Sorted",
     "Sorting Algorithms" : "Sorting Algorithms",
