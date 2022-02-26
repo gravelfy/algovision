@@ -1,0 +1,85 @@
+h1 {
+  text-align: center;
+  font-size: 1.3em;
+}
+
+h2 {
+  text-align: center;
+  font-size: 1.1em;
+}
+
+h3 {
+  text-align: center;
+  font-weight: normal;
+  font-size: 0.9em;
+}
+
+select {
+  width: 100%;
+  padding: 3px 3px;
+  border: 1px dashed dimgrey;
+  border-radius: 4px;
+  color: #000277;
+  background-color: darkgrey;
+}
+
+.boutonsPlusMoins {
+  background-color: #000277;
+  color: white;
+  width: 25%;
+}
+
+.boutonsTri {
+  background-color: #000277;
+  color: white;
+  width: 33.33%;
+}
+
+button:disabled {
+  background-color: darkgray;
+  color: dimgray;
+}
+
+button {
+  font-weight: bold;
+}
+
+@media screen and (min-width: 601px) {
+  .boutonsTri {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .boutonsTri {
+    font-size: 14px;
+    height: 36px;
+  }
+  .boutonsPlusMoins {
+    font-size: 14px;
+    height: 36px;
+  }
+}
+
+.boutonsRow {
+  width: 100%;
+  vertical-align: text-bottom;
+  border: 3px;
+  border-color: dimgrey;
+}
+
+.textinfo {
+  width: 100%;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: left;
+  padding: 1em;
+}
+
+.textinforight {
+  width: 66%;
+  float: right;
+  font-size: 16px;
+  text-align: center;
+  font-weight: bold;
+}
