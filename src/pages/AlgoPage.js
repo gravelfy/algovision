@@ -130,13 +130,13 @@ export default function AlgoPage() {
             }}
           >
             {currentAlgoState === AUCUN || currentAlgoState === TRIE
-              ? '🔀' + t('Shuffle')
-              : '⏹' + t('Stop')}
+              ? ' 🔀 ' + t('Shuffle')
+              : ' ■ ' + t('Stop')}
           </button>
           <button
             className={classes.boutonsTri}
             style={{
-              fontWeight: currentAlgoState === INSERTION ? 'bolded' : 'bold',
+              fontWeight: currentAlgoState === INSERTION ? 'bolder' : 'bold',
             }}
             disabled={!isTriEnabled}
             onClick={() => {

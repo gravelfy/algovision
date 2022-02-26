@@ -27,12 +27,14 @@ select {
   background-color: #000277;
   color: white;
   width: 25%;
+  height: 2rem;
 }
 
 .boutonsTri {
   background-color: #000277;
   color: white;
   width: 33.33%;
+  height: 2.5rem;
 }
 
 button:disabled {
@@ -42,6 +44,7 @@ button:disabled {
 
 button {
   font-weight: bold;
+  vertical-align: middle;
 }
 
 @media screen and (min-width: 601px) {
