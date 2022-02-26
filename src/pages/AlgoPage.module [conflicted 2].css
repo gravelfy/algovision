@@ -32,25 +32,11 @@ ul {
   margin: 0;
   padding: 0;
   display: flex;
-  /* height: 2.5rem; */
-  line-height: 2.5rem;
-  background-color: #000277;
+  vertical-align: middle;
 }
 
 li {
-  color: white;
-  font-weight: bold;
-  width: 33.33%;
   text-align: center;
-  flex-direction: row;
-  align-items: center;
-  vertical-align: text-top;
-}
-
-.icon {
-  top: -0.09em;
-  position: relative;
-  display: inline-block;
 }
 
 .boutonsPlusMoins {
@@ -61,14 +47,10 @@ li {
 }
 
 .boutonsTri {
-  height: 2.5rem;
   background-color: #000277;
   color: white;
-  font-weight: bold;
   width: 33.33%;
-  text-align: center;
-  align-items: center;
-  vertical-align: text-top;
+  height: 2.5rem;
 }
 
 button:disabled {
@@ -84,18 +66,15 @@ button {
   .boutonsTri {
     font-size: 14px;
   }
-  .boutonsPlusMoins {
-    font-size: 14px;
-  }
 }
 
 @media screen and (max-width: 600px) {
   .boutonsTri {
-    font-size: 11px;
+    font-size: 14px;
     height: 36px;
   }
   .boutonsPlusMoins {
-    font-size: 11px;
+    font-size: 14px;
     height: 36px;
   }
 }

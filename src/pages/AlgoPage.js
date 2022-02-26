@@ -120,7 +120,7 @@ export default function AlgoPage() {
               triABulles(chartRef.current.state.tableau);
             }}
           >
-            ▶ {t('Bubble sort')}
+            <div className={classes.icon}>▶</div> {t('Bubble sort')}
           </button>
 
           <button
@@ -129,9 +129,59 @@ export default function AlgoPage() {
               melanger(chartRef.current.state.tableau);
             }}
           >
-            {currentAlgoState === AUCUN || currentAlgoState === TRIE
-              ? ' 🔀 ' + t('Shuffle')
-              : ' ■ ' + t('Stop')}
+            {currentAlgoState === AUCUN || currentAlgoState === TRIE ? (
+              <>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="11px"
+                  height="11px"
+                  viewBox="-0.5 -0.5 16 16"
+                  content='&lt;mxfile host="Electron" modified="2022-02-26T23:16:37.659Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/15.8.7 Chrome/91.0.4472.164 Electron/13.6.2 Safari/537.36" etag="UfI8Gt0LXesU7T0Q91hM" version="15.8.7" type="device"&gt;&lt;diagram id="rxYBLjGZQfBaCaaoXt3e" name="Page-1"&gt;7VVNc4IwEP01HNsJoNYerdX20M449eA5JRFSA+uEANpf32CWL9G2zthbOTDk7du3y+4bcPxpvHtSdBu9AuPS8QjbOf6j43nD0b25l8DeAv4AgVAJZiG3AZbikyNIEM0E42mHqAGkFtsuGECS8EBbDHOpUlCkHWgNslt1S0PeA5YBlX10JZiOEHUJaQLPXIQRlh4PMRDTioxAGlEGRQvyZ44/VQDaPsW7KZfl7Kq52Lz5mWjdmOKJ/k3CWmRiPoheJgvx9rHaPLB8V9wMrEpOZYYvjM3qfTWBIFM5LzVcx3/gCZuUUzXHdwnBxkCRjiVGFWQJO3CJOaVawaaemkts+lzIim4JU5CgDqX8+eEyEdsEZ73dNC/r1iM01uMQc632hlI0S6o2EbXWU2GKS6pF3pWn6JWwlqsrLECYwh5BW3vV+tHV7h3pSqSQqYBjVnspx0LjrlDjXRTSVIVc94TMEui+RduWhPSbhr3TDZ/ta3C6L+SbB9tBdWrtoIEOBrzAjMN/M17DjAa4Je1rdB1v9kz+R97sfch+8OaRly/1pjk2H2FLb/5k/uwL&lt;/diagram&gt;&lt;/mxfile&gt;'
+                >
+                  <defs />
+                  <g>
+                    <path
+                      d="M 1 2.6 Q 5 2.6 7 7.6 Q 9 12.6 11.56 12.6"
+                      fill="none"
+                      stroke="#ffffff"
+                      stroke-width="2"
+                      stroke-miterlimit="10"
+                      pointer-events="stroke"
+                    />
+                    <path
+                      d="M 14.76 12.6 L 11.56 14.2 L 11.56 11 Z"
+                      fill="#ffffff"
+                      stroke="#ffffff"
+                      stroke-width="2"
+                      stroke-miterlimit="10"
+                      pointer-events="all"
+                    />
+                    <path
+                      d="M 1 12.6 Q 5 12.6 7 7.6 Q 9 2.6 11.56 2.6"
+                      fill="none"
+                      stroke="#ffffff"
+                      stroke-width="2"
+                      stroke-miterlimit="10"
+                      pointer-events="stroke"
+                    />
+                    <path
+                      d="M 14.76 2.6 L 11.56 4.2 L 11.56 1 Z"
+                      fill="#ffffff"
+                      stroke="#ffffff"
+                      stroke-width="2"
+                      stroke-miterlimit="10"
+                      pointer-events="all"
+                    />
+                  </g>
+                </svg>{' '}
+                {t('Shuffle')}
+              </>
+            ) : (
+              // ' 🔀 ' + t('Shuffle')
+              <>
+                <div className={classes.icon}>■</div> {t('Stop')}
+              </>
+            )}
           </button>
           <button
             className={classes.boutonsTri}
@@ -143,7 +193,7 @@ export default function AlgoPage() {
               triInsertion(chartRef.current.state.tableau);
             }}
           >
-            ▶ {t('Insertion sort')}
+            <div className={classes.icon}>▶</div> {t('Insertion sort')}
           </button>
         </div>
 
@@ -187,8 +237,9 @@ export default function AlgoPage() {
           </button>
         </div>
         <div className={classes.textinfo}>
-          {t('n_elements_array', { count: countState })} :{' '}
-          {getCurrentAlgoTitle()}
+          {t('n_elements_array', { count: countState })}
+          <br />
+          <nobr>{getCurrentAlgoTitle()}</nobr>
         </div>
 
         {
