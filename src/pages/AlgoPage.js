@@ -144,33 +144,25 @@ export default function AlgoPage() {
                       d="M 1 2.6 Q 5 2.6 7 7.6 Q 9 12.6 11.56 12.6"
                       fill="none"
                       stroke="#ffffff"
-                      stroke-width="2"
-                      stroke-miterlimit="10"
-                      pointer-events="stroke"
+                      strokeWidth="2"
                     />
                     <path
                       d="M 14.76 12.6 L 11.56 14.2 L 11.56 11 Z"
                       fill="#ffffff"
                       stroke="#ffffff"
-                      stroke-width="2"
-                      stroke-miterlimit="10"
-                      pointer-events="all"
+                      strokeWidth="2"
                     />
                     <path
                       d="M 1 12.6 Q 5 12.6 7 7.6 Q 9 2.6 11.56 2.6"
                       fill="none"
                       stroke="#ffffff"
-                      stroke-width="2"
-                      stroke-miterlimit="10"
-                      pointer-events="stroke"
+                      strokeWidth="2"
                     />
                     <path
                       d="M 14.76 2.6 L 11.56 4.2 L 11.56 1 Z"
                       fill="#ffffff"
                       stroke="#ffffff"
-                      stroke-width="2"
-                      stroke-miterlimit="10"
-                      pointer-events="all"
+                      strokeWidth="2"
                     />
                   </g>
                 </svg>{' '}
