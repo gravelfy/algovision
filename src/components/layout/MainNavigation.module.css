@@ -1,5 +1,5 @@
 .header {
-  height: 5rem;
+  height: 4rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -9,13 +9,15 @@
 
 @media screen and (min-width: 601px) {
   .logo {
-    font-size: 45px;
+    /* font-size: 45px; */
+    font-size: 2rem;
   }
 }
 
 @media screen and (max-width: 600px) {
   .logo {
-    font-size: 30px;
+    /* font-size: 30px; */
+    font-size: 1.6rem;
   }
 }
 

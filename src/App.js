@@ -11,18 +11,15 @@ function App() {
   const [params, setParams] = useState(AlgoParameters());
 
   return (
-    <div>
-      <Layout>
-        <ParamsContext.Provider value={[params, setParams]}>
-          <Switch>
-            <Route path="/algo-react" exact>
-              {/* <Context.Provider value={[context, setContext]}> */}
-              <AlgoPage />
-            </Route>
-          </Switch>
-        </ParamsContext.Provider>
-      </Layout>
-    </div>
+    <Layout>
+      <ParamsContext.Provider value={[params, setParams]}>
+        <Switch>
+          <Route path="/algo-react" exact>
+            <AlgoPage />
+          </Route>
+        </Switch>
+      </ParamsContext.Provider>
+    </Layout>
   );
 }
 
