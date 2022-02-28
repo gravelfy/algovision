@@ -19,7 +19,11 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
+    react: {
+      useSuspense: false, //   <---- this will do the magic
+    },
     resources,
+    fallbackLng: 'en', // use en if detected lng is not available,
     // lng: 'en', //default language
     keySeparator: false,
     interpolation: {

@@ -17,6 +17,9 @@ function App() {
           <Route path="/algo-react" exact>
             <AlgoPage />
           </Route>
+          <Route path="*">
+            <AlgoPage />
+          </Route>
         </Switch>
       </ParamsContext.Provider>
     </Layout>
