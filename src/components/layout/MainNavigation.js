@@ -17,6 +17,7 @@ function MainNavigation() {
         className="custom-select"
         style={{ width: 50 }}
         onChange={changeLanguageHandler}
+        value={i18n.language}
       >
         <option value="en">EN</option>
         <option value="fr">FR</option>
