@@ -12,10 +12,13 @@ const Toggle = ({ darkMode, setDarkMode }) => (
         checked={darkMode}
         onChange={() => setDarkMode(!darkMode)}
       />
-      <label htmlFor="dmcheck" />
+
+      <label htmlFor="dmcheck"></label>
     </span>
 
-    <span className={classes.moon}>🌙</span>
+    <button className={classes.moon} onClick={() => setDarkMode(true)}>
+      🌙
+    </button>
   </div>
 );
 
