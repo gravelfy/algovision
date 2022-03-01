@@ -1,15 +1,22 @@
-.moon {
+.dmtoggle {
   border: none;
   background: none;
   margin: 0;
   padding: 0;
   font-size: 0.8rem;
-  top: -8px;
-  left: -38px;
   position: relative;
-  opacity: 100%;
+  opacity: 50%;
   z-index: 99;
   cursor: pointer;
+}
+
+.moon {
+  top: -8px;
+  left: -38px;
+}
+.sun {
+  top: -8px;
+  left: 22px;
 }
 
 input[type='checkbox'].dmcheck {
@@ -45,7 +52,7 @@ input[type='checkbox'].dmcheck {
     position: relative;
     top: -4px;
     left: -40px;
-    opacity: 0.9;
+    opacity: 100%;
     background-color: #f6f6f6;
     z-index: 100;
   }

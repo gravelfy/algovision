@@ -2,8 +2,14 @@ import React from 'react';
 import classes from './toggle.module.scss';
 
 const Toggle = ({ darkMode, setDarkMode }) => (
-  <div className="dark-mode-toggle">
-    {/* <button type="button" onClick={() => setDarkMode(false)}></button> */}
+  <div className="darkmodetoggle">
+    <button
+      type="button"
+      className={`${classes.sun} ${classes.dmtoggle}`}
+      onClick={() => setDarkMode(false)}
+    >
+      🔆
+    </button>
     <span className="toggle-control">
       <input
         className={classes.dmcheck}
@@ -16,7 +22,10 @@ const Toggle = ({ darkMode, setDarkMode }) => (
       <label htmlFor="dmcheck"></label>
     </span>
 
-    <button className={classes.moon} onClick={() => setDarkMode(true)}>
+    <button
+      className={`${classes.moon} ${classes.dmtoggle}`}
+      onClick={() => setDarkMode(true)}
+    >
       🌙
     </button>
   </div>
