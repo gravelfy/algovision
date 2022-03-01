@@ -7,9 +7,9 @@
 }
 
 .barre {
-  border-right: 1px solid white;
-  background-color: #282c34;
-  color: white;
+  border-right: 1px solid var(--color-background);
+  background-color: var(--bar-color-background);
+  color: var(--bar-color-foreground);
 }
 
 /* .barreidx {

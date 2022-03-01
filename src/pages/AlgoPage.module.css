@@ -60,16 +60,16 @@ li {
 }
 
 .boutonsPlusMoins {
-  background-color: #000277;
-  color: white;
+  background-color: var(--ui-color-background);
+  color: var(--ui-color-foreground);
   width: 25%;
   height: 2rem;
 }
 
 .boutonsTri {
   height: 2.5rem;
-  background-color: #000277;
-  color: white;
+  background-color: var(--ui-color-background);
+  color: var(--ui-color-foreground);
   font-weight: bold;
   width: 33.33%;
   text-align: center;

@@ -2,8 +2,9 @@
   height: 4rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  background-color: #000277;
+  justify-content: center;
+
+  background-color: var(--nav-color-background);
   padding: 0 5%;
 }
 
@@ -24,8 +25,15 @@
 .logo {
   /* font-size: 2rem; */
   /* font-size: 4vw; */
-  color: white;
+  width: 70%;
+  color: var(--nav-color-foreground);
   font-weight: bold;
+}
+
+.settings {
+  vertical-align: middle;
+  display: inline;
+  /* align-content: flex-end; */
 }
 
 /* //////// ! NOT BELOW /////// */
@@ -45,19 +53,20 @@
 .header a {
   text-decoration: none;
   font-size: 1.5rem;
-  color: white;
+  color: var(--nav-color-foreground);
 }
 
 .header a:hover,
 .header a:active,
 .header a.active {
-  color: white;
+  color: var(--nav-color-foreground);
 }
-/*
-.badge {
-  background-color: #cc2062;
-  color: white;
-  border-radius: 12px;
-  padding: 0 1rem;
-  margin-left: 0.5rem;
-} */
+
+.lang {
+  width: 45px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  font-size: 9pt;
+  font-weight: bold;
+}

@@ -1,0 +1,47 @@
+.moon {
+  border: none;
+  background: none;
+  top: -8px;
+  left: -18px;
+  position: relative;
+  opacity: 50%;
+}
+
+input[type='checkbox'].dmcheck {
+  top: 3px;
+  left: 1px;
+  width: 40px;
+  height: 22px;
+  background: #555;
+  position: relative;
+  border-radius: 15px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  vertical-align: 2px;
+  outline: none;
+
+  &:checked + label {
+    left: -22px;
+  }
+
+  &:focus-visible {
+    outline: solid 2px;
+  }
+
+  & + label {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    position: relative;
+    top: -4px;
+    left: -40px;
+    opacity: 0.9;
+    background-color: #f6f6f6;
+    z-index: 100;
+  }
+}

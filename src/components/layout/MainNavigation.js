@@ -1,8 +1,11 @@
 import { useTranslation } from 'react-i18next';
+import useDarkMode from '../../hooks/use-dark-mode';
+import Toggle from '../ui/toggle';
 import classes from './MainNavigation.module.css';
 
 function MainNavigation() {
   const { t, i18n } = useTranslation();
+  const [darkMode, setDarkMode] = useDarkMode();
 
   const changeLanguageHandler = (e) => {
     const languageValue = e.target.value;
@@ -13,15 +16,16 @@ function MainNavigation() {
   return (
     <header className={classes.header}>
       <div className={classes.logo}>{t('Sorting Algorithms')}</div>
+      <div className={classes.settings}></div>
       <select
-        className="custom-select"
-        style={{ width: 50 }}
+        className={classes.lang}
         onChange={changeLanguageHandler}
         value={i18n.language}
       >
         <option value="en">EN</option>
         <option value="fr">FR</option>
       </select>
+      <Toggle darkMode={darkMode} setDarkMode={setDarkMode} />
     </header>
   );
 }
