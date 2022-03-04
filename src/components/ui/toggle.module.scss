@@ -11,16 +11,16 @@
 }
 
 .moon {
-  top: -8px;
+  top: 0px;
   left: -38px;
 }
 .sun {
-  top: -8px;
+  top: 0px;
   left: 22px;
 }
 
 input[type='checkbox'].dmcheck {
-  top: 3px;
+  top: 0px;
   left: 1px;
   width: 40px;
   height: 22px;
@@ -33,7 +33,29 @@ input[type='checkbox'].dmcheck {
   cursor: pointer;
   vertical-align: 2px;
   outline: none;
-
+  &:before {
+    position: relative;
+    content: '🔆';
+    top: 2px;
+    left: 3px;
+    opacity: 33%;
+  }
+  // & + label::before {
+  //   content: '🔆';
+  //   top: 3px;
+  //   left: 33px;
+  // }
+  &:after {
+    position: relative;
+    top: 2px;
+    left: 8px;
+    content: '🌙';
+    opacity: 33%;
+  }
+  // &::after {
+  //   top: 6px;
+  //   left: 43px;
+  // }
   &:checked + label {
     left: -22px;
   }
@@ -50,7 +72,7 @@ input[type='checkbox'].dmcheck {
     transition: all 0.2s ease;
     cursor: pointer;
     position: relative;
-    top: -4px;
+    top: 0px;
     left: -40px;
     opacity: 100%;
     background-color: #f6f6f6;
