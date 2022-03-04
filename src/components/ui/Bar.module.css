@@ -12,6 +12,11 @@
   color: var(--bar-color-foreground);
 }
 
+.last {
+  border: 0;
+  background-color: var(--bar-color-background);
+  color: var(--bar-color-foreground);
+}
 /* .barreidx {
   border-right: 1px solid white;
   color: #282c34;

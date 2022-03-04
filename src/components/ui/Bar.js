@@ -16,9 +16,21 @@ function Bar(props) {
     n = null;
   }
 
+  const isLast = () => {
+    if (props.i === props.cpc - 1) {
+      return true;
+    } else {
+      console.log('non');
+      return false;
+    }
+  };
+
   return (
     <div className={classes.column}>
-      <div className={classes.barre} style={{ flexBasis: h }}>
+      <div
+        className={isLast() ? classes.last : classes.barre}
+        style={{ flexBasis: h }}
+      >
         {n}
       </div>
     </div>
