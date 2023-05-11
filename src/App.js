@@ -14,7 +14,7 @@ function App() {
     <Layout>
       <ParamsContext.Provider value={[params, setParams]}>
         <Switch>
-          <Route path="/algo-react" exact>
+          <Route path="/algovision" exact>
             <AlgoPage />
           </Route>
           <Route path="*">
