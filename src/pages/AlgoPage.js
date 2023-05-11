@@ -213,15 +213,17 @@ export default function AlgoPage() {
           </div>
 
           <div className={classes.resizebtn}>
-            {/* <button
-              className={`${classes.boutons} ${classes.boutonsPlusMoins}`}
-              disabled={!isMelangerEnabled || countState < 14}
-              onClick={() => {
-                tableauResize(countState - 10);
-              }}
-            >
-              &lt;&lt;
-            </button> */}
+            {
+              <button
+                className={`${classes.boutons} ${classes.boutonsPlusMoins}`}
+                disabled={!isMelangerEnabled || countState < 14}
+                onClick={() => {
+                  tableauResize(countState - 10);
+                }}
+              >
+                &lt;&lt;
+              </button>
+            }
 
             <button
               className={`${classes.boutons} ${classes.boutonsPlusMoins}`}
@@ -253,15 +255,17 @@ export default function AlgoPage() {
             >
               &gt;
             </button>
-            {/* <button
-              className={`${classes.boutons} ${classes.boutonsPlusMoins}`}
-              disabled={!isMelangerEnabled || countState > 191}
-              onClick={() => {
-                tableauResize(countState + 10);
-              }}
-            >
-              &gt;&gt;
-            </button> */}
+            {
+              <button
+                className={`${classes.boutons} ${classes.boutonsPlusMoins}`}
+                disabled={!isMelangerEnabled || countState > 191}
+                onClick={() => {
+                  tableauResize(countState + 10);
+                }}
+              >
+                &gt;&gt;
+              </button>
+            }
           </div>
           <div className={`${classes.textinfo} ${classes.inforight}`}>
             <nobr>{getCurrentAlgoTitle()}</nobr>
@@ -269,7 +273,7 @@ export default function AlgoPage() {
         </div>
       </Card>
 
-      <h3>2022 François Gravel</h3>
+      <h3>2023 François Y. Gravel</h3>
     </section>
   );
 }
