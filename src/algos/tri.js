@@ -1,21 +1,3 @@
-/* // ! //////////// Tri-Insertion \\\\\\\\\\\\ ! \\
-
-    Tri-Insertion (Tab : Tableau)
-    Pour (j = 2 à n) Faire
-    
-    clé ← Tab[j]
-    //Insérer Tab[j] dans la suite Tab[1..j-1]
-    
-    i ← j-1 
-    TantQue (i > 0 et Tab[i] > clé) Faire
-      Tab[i+1] ← Tab[i]
-      i ← i - 1
-    FinTantQue
-    Tab[i+1] ← clé
-    FinPour
-  */
-
-//const triageInsertion = (tab) => {
 export function triageInsertion(tab) {
   var animFrames = [];
   var liste = [...tab];
@@ -35,21 +17,7 @@ export function triageInsertion(tab) {
   return animFrames;
 }
 
-/*
- ! Pseudo code 
- // ! //////// Algo Bulles  \\\\\\\\\\\\\ ! \\
- Tri-Bulles(Tab: Tableau, nbreElements: Entier)
- Pour (i = 1 à n) Faire
-     Pour (j = n à i+1) Faire
-     Si (Tab[j] < Tab[j-1]) Alors
-         Permut(Tab, j, j-1)
-     FinSi
-     FinPour
-     FinPour
- */
-
 export function triageABulles(tab) {
-  //
   var liste = [...tab];
   var animFrames = [];
   animFrames = [[...liste]];
@@ -63,29 +31,5 @@ export function triageABulles(tab) {
       }
     }
   }
-  return animFrames;
-}
-
-// ! Pseudo code
-// Tri-Fusion (Tab : Tableau, p : Entier, r : Entier)
-//  Si (p < r)
-// q ← [(p + r) / 2]
-// //partager la suite des éléments en 2.
-// Tri-Fusion (Tab, p, q)
-// Tri-Fusion (Tab, q+1, r)
-// Fusion (Tab, p, q, r)
-//  FinSi
-
-export function triageFusion(tab, depart, fin) {
-  //
-  var liste = [...tab];
-  var animFrames = [];
-  animFrames = [[...liste]];
-  var q = (depart + fin) / 2;
-
-  triageFusion(tab, depart, q);
-  triageFusion(tab, q + 1, fin);
-
-  animFrames.push([...liste]);
   return animFrames;
 }

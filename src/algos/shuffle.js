@@ -1,4 +1,3 @@
-// Algo: create array
 export function createArray(n) {
   let a = [];
   for (var i = 1; i <= n; i++) {
@@ -7,8 +6,7 @@ export function createArray(n) {
   return a;
 }
 
-// Algo: Fisher–Yates Shuffle
-
+// Fisher–Yates Shuffle
 export function shuffle(array) {
   var m = array.length,
     t,

@@ -20,11 +20,10 @@ i18n
   .use(initReactI18next)
   .init({
     react: {
-      useSuspense: false, //   <---- this will do the magic
+      useSuspense: false,
     },
     resources,
-    fallbackLng: 'en', // use en if detected lng is not available,
-    // lng: 'en', //default language
+    fallbackLng: 'en', // use 'en' if detected lng is not available
     keySeparator: false,
     interpolation: {
       escapeValue: false,
