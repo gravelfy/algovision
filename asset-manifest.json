@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/algovision/static/css/main.00701ced.css",
-    "main.js": "/algovision/static/js/main.c73d9b61.js",
+    "main.css": "/algovision/static/css/main.9854b2e6.css",
+    "main.js": "/algovision/static/js/main.18530a37.js",
     "index.html": "/algovision/index.html",
     "static/media/getFetch.cjs": "/algovision/static/media/getFetch.40f37ddea2378391108f.cjs",
-    "main.00701ced.css.map": "/algovision/static/css/main.00701ced.css.map",
-    "main.c73d9b61.js.map": "/algovision/static/js/main.c73d9b61.js.map"
+    "main.9854b2e6.css.map": "/algovision/static/css/main.9854b2e6.css.map",
+    "main.18530a37.js.map": "/algovision/static/js/main.18530a37.js.map"
   },
   "entrypoints": [
-    "static/css/main.00701ced.css",
-    "static/js/main.c73d9b61.js"
+    "static/css/main.9854b2e6.css",
+    "static/js/main.18530a37.js"
   ]
 }
