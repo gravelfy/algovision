@@ -10,29 +10,24 @@
 
 @media screen and (min-width: 601px) {
   .logo {
-    /* font-size: 45px; */
     font-size: 2rem;
   }
 }
 
 @media screen and (max-width: 600px) {
   .header {
-    /* padding: 0% 2% 0% 0%; */
     padding-left: 2%;
     padding-top: 0;
     padding-bottom: 0;
     padding-right: 0%;
   }
   .logo {
-    /* font-size: 30px; */
     font-size: 1.6rem;
   }
 }
 
 .logo {
-  /* font-size: 2rem; */
-  /* font-size: 4vw; */
-  width: 66%;
+  width: 60vw;
   color: var(--nav-color-foreground);
   font-weight: bold;
 }
@@ -40,7 +35,6 @@
 .settings {
   vertical-align: middle;
   display: inline;
-  /* align-content: flex-end; */
 }
 
 /* //////// ! NOT BELOW /////// */

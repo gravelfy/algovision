@@ -14,6 +14,7 @@ html {
   --bar-color-foreground: black;
   --ui-color-disabled: #444444;
   --ui-color-shadow: 255, 255, 255;
+  --credit-color-foreground: #7a7a7a;
 }
 
 body {
@@ -25,9 +26,10 @@ body {
   --nav-color-foreground: #fafafa;
   --bar-color-background: #282c34;
   --bar-color-foreground: white;
-  --ui-color-disabled: #cccccc;
+  --ui-color-disabled: #666666;
   --ui-color-shadow: 127, 127, 127;
-
+  --credit-color-foreground: #7a7a7a;
+  
   background-color: var(--color-background);
   color: var(--color-foreground);
 

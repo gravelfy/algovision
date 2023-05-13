@@ -26,7 +26,7 @@ select {
   padding: 3px 3px;
   border: 1px dashed dimgrey;
   border-radius: 4px;
-  color: #000277;
+  color: --nav-color-background;
   background-color: darkgrey;
 }
 
@@ -39,7 +39,6 @@ ul {
   margin: 0;
   padding: 0;
   display: flex;
-  /* height: 2.5rem; */
   line-height: 2.5rem;
   background-color: #000277;
 }
@@ -58,14 +57,6 @@ li {
   top: -0.09em;
   position: relative;
   display: inline-block;
-}
-
-.boutonsPlusMoins {
-  background-color: var(--color-background);
-  color: var(--color-foreground);
-  // width: 25%;
-  height: 2rem;
-  border: 0;
 }
 
 .boutonsTri {
@@ -89,7 +80,6 @@ li {
   justify-content: center;
   margin: 0;
   padding: 0;
-  // display: inline-block;
   border-top: 1px solid var(--bar-color-foreground);
 }
 
@@ -122,39 +112,47 @@ input[type='range']::-moz-range-track {
 .resizebtn {
   background-color: var(--bar-color-background);
   color: var(--bar-color-foreground);
-  // display: inline-block;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 40%;
+  width: 60%;
   margin: 0;
   padding: 0em;
-  border: 0px solid fuchsia;
+  border: 0px;
+}
+
+.boutonsPlusMoins {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-size: 1.5em;
+  padding: 4px 10px 4px 10px ;
+  border: 0px;
+  font-weight: bold;
 }
 
 .textinfo {
   display: inline-block;
   position: relative;
-  width: 30%;
-  border: 0px solid green;
-  // font-weight: bold;
+  width: 20%;
+  border: 0px;
   padding: 0em;
   vertical-align: middle;
 }
 .infoleft {
-  margin-left: 1em;
+  font-size: 0.65em;
+  margin-left: 0.6em;
   text-align: left;
 }
 .inforight {
-  margin-right: 1em;
+  font-size: 0.65em;
+  margin-right: 0.6em;
   text-align: right;
 }
 
 .boutons {
   font-weight: bold;
   cursor: pointer;
-
   background-color: inherit;
   color: inherit;
   &:not(:disabled):hover {
@@ -168,37 +166,60 @@ input[type='range']::-moz-range-track {
   }
 }
 
+.credits {
+  position:fixed;
+  bottom:0;
+  margin-bottom: 10px;
+  width:100%;
+  text-align: center;
+  font-weight: normal;
+  font-size: 7pt;
+  color: var(--credit-color-foreground);
+}
+
+.credits a {
+  color: var(--credit-color-foreground);
+}
+
 @media screen and (min-width: 601px) {
   .boutonsTri {
-    font-size: 1.6rem;
+    font-size: 1.1rem;
     height: 4rem;
   }
-  .boutonsPlusMoins {
-    font-size: 0.7rem;
-    // height: 2rem;
-  }
-  .textinfo {
-    font-size: 1rem;
-  }
   section {
-    min-width: 54vw;
+    width: 60%;
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (min-width: 741px) and (max-width: 800px){
+  .boutonsTri {
+    font-size: 1rem;
+    height: 4rem;
+  }
+  section {
+    width: 60%;
+  }
+}
+
+
+
+@media screen and (max-width: 740px) {
+  .shuffleicon {
+    width: 12px;
+    height: 12px;
+  }
   .boutonsTri {
     font-size: 0.9rem;
     height: 2rem;
   }
   .boutonsPlusMoins {
-    font-size: 0.7rem;
     height: 2rem;
   }
   .textinfo {
-    font-size: 1.1rem;
+    font-size: 0.55rem;
   }
   section {
-    min-width: 84vw;
+    width: 60%;
   }
 }
 

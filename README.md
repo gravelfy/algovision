@@ -4,6 +4,10 @@ This project is a simple React app that visualize sorting algorythms step by ste
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Demo
+
+You can see a live demo of this project at [https://gravelfy.github.io/algovision//](https://gravelfy.github.io/algovision//)
+
 ## Sorting algorythms implemented
 
 - Bubble sort

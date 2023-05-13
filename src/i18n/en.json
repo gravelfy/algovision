@@ -1,10 +1,10 @@
 {
     "Bubble Sort" : "Bubble Sort",
     "Insertion sort" : "Insertion sort",
-    "n_elements_array": "{{count}} element array",
+    "n_elements_array": "{{count}} elements",
     "Shuffle" : "Shuffle",
     "Sorted" : "Sorted",
-    "Sorting Algorithms" : "Sorting Algorithms",
+    "Sorting Algorithms" : "Algovision",
     "Stop" : "Stop",
     "Unsorted" : "Unsorted"
     }

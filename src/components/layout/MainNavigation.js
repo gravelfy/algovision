@@ -10,12 +10,12 @@ function MainNavigation() {
   const changeLanguageHandler = (e) => {
     const languageValue = e.target.value;
     i18n.changeLanguage(languageValue);
-    document.title = t('Sorting Algorithms');
+    document.title = t('Algovision') + ' : ' + t('Sorting Algorithms');
   };
 
   return (
     <header className={classes.header}>
-      <div className={classes.logo}>{t('Sorting Algorithms')}</div>
+      <div className={classes.logo}>{t('Algovision')}</div>
       <div className={classes.settings}></div>
       <select
         className={classes.lang}

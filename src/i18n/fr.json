@@ -1,9 +1,10 @@
 {
     "Bubble sort" : "Tri à bulles",
     "Insertion sort" : "Tri insertion",
-    "n_elements_array": "Tableau de {{count}} éléments",
+    "n_elements_array": "{{count}} éléments",
     "Shuffle" : "Mélanger",
     "Sorted" : "Trié",
+    "Algovision" : "Algovision",
     "Sorting Algorithms" : "Algorithmes de tri",
     "Stop" : "Arrêter",
     "Unsorted" : "Non-trié"
