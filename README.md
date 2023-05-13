@@ -6,7 +6,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Demo
 
-You can see a live demo of this project at [https://gravelfy.github.io/algovision/](https://gravelfy.github.io/algovision//)
+You can see a live demo of this project at [https://gravelfy.github.io/algovision/](https://gravelfy.github.io/algovision/)
 
 ## Sorting algorythms implemented
 
